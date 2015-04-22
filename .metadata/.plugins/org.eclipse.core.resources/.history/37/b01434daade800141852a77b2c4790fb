@@ -1,0 +1,36 @@
+package com.khoisang.drdigital.ui;
+
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
+import android.os.Bundle;
+
+import com.khoisang.khoisanglibary.ui.fragment.BaseFragment;
+
+public class FragmentInformation extends BaseFragment implements
+		OnClickListener {
+
+	@Override
+	public void onClick(DialogInterface dialog, int which) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected int getLayoutID() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	protected void afterSetLayoutID(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected void reCreateView() {
+		// TODO Auto-generated method stub
+
+	}
+
+}

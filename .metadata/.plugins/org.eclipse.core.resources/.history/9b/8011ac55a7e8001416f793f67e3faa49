@@ -1,0 +1,71 @@
+package com.khoisang.drdigital.ui;
+
+import java.util.ArrayList;
+
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+
+import com.khoisang.khoisanglibary.ui.ListViewItem;
+import com.khoisang.khoisanglibary.ui.fragment.BaseFragment;
+import com.khoisang.khoisanglibary.ui.fragment.ListViewFragment;
+
+public class FragmentLocation extends ListViewFragment implements OnClickListener {
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected int getLayoutID() {
+		// TODO Auto-generated method stub
+		return R.layout.frag;
+	}
+
+	@Override
+	protected void afterSetLayoutID(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void reCreateView() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected int getListViewID() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	protected int getLayoutItemID() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	protected ArrayList<Object> getDataToListView() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected void onClick(AdapterView<?> listView, View itemView,
+			int position, Object obj) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected ListViewItem getItemObject() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

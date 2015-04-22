@@ -601,7 +601,7 @@ public final class R {
 		public static final int activity_navigation_drawer_menu_double = 0x7f030018;
 		public static final int activity_navigation_drawer_menu_listview = 0x7f030019;
 		public static final int activity_navigation_drawer_menu_single = 0x7f03001a;
-		public static final int support_simple_spinner_dropdown_item = 0x7f03001d;
+		public static final int support_simple_spinner_dropdown_item = 0x7f030020;
 	}
 	public static final class string {
 		public static final int abc_action_bar_home_description = 0x7f0a0001;

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">DrDigital</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="information">Information</string>
+    <string name="support">Support</string>
+    <string name="location">Locations</string>
+    <string name="enquiry">Enquiry</string>
+    <string name="action_settings">Settings</string>
+    <string name="support_header">Sale Enquiry and In-Store Services</string>
+    <string name="support_map">Courts Subang Megastore &lt;Show map&gt;</string>
+    <string name="support_phone_number">tel:+84866605741</string>
+    <string name="support_open_time">Opens from 10 a.m to 10 p.m daily</string>
+
+</resources>

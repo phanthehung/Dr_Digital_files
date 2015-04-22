@@ -8,11 +8,20 @@
 <fullyQualifiedTypeName name="com.khoisang.khoisanglibary.R"/>
 <fullyQualifiedTypeName name="android.app.Fragment"/>
 <fullyQualifiedTypeName name="com.khoisang.drdigital.R.layout"/>
-<fullyQualifiedTypeName name="com.khoisang.khoisanglibary.ui.fragment.BaseFragment"/>
 <fullyQualifiedTypeName name="android.widget.LinearLayout"/>
 <fullyQualifiedTypeName name="com.khoisang.khoisanglibary.ui.activity.BaseActivity"/>
-<fullyQualifiedTypeName name="android.view.View.OnClickListener"/>
 <fullyQualifiedTypeName name="com.khoisang.drdigital.ui.R.layout"/>
 <fullyQualifiedTypeName name="android.util.Log"/>
+<fullyQualifiedTypeName name="com.khoisang.drdigital.ui.FragmentHome"/>
+<fullyQualifiedTypeName name="com.khoisang.drdigital.ui.FramentSupport"/>
+<fullyQualifiedTypeName name="android.support.v4.app.FragmentStatePagerAdapter"/>
 <fullyQualifiedTypeName name="android.content.Intent"/>
+<fullyQualifiedTypeName name="android.net.Uri"/>
+<fullyQualifiedTypeName name="com.khoisang.khoisanglibary.ui.fragment.BaseFragment"/>
+<fullyQualifiedTypeName name="org.w3c.dom.Text"/>
+<fullyQualifiedTypeName name="com.khoisang.drdigital.ui.FragmentSupport"/>
+<fullyQualifiedTypeName name="android.widget.TextView"/>
+<fullyQualifiedTypeName name="android.widget.ImageView"/>
+<fullyQualifiedTypeName name="android.webkit.WebView"/>
+<fullyQualifiedTypeName name="android.view.View.OnClickListener"/>
 </qualifiedTypeNameHistroy>

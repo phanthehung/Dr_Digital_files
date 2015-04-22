@@ -1,0 +1,7 @@
+package com.khoisang.drdigital.ui;
+
+import com.khoisang.khoisanglibary.ui.fragment.BaseFragment;
+
+public class FragmentHome extends BaseFragment{
+
+}

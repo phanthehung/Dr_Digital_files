@@ -1,0 +1,33 @@
+package com.khoisang.drdigital.ui;
+
+import android.os.Bundle;
+import android.widget.LinearLayout;
+
+import com.khoisang.khoisanglibary.ui.fragment.BaseFragment;
+
+public class FragmentHome extends BaseFragment{
+
+	private LinearLayout _location;
+	private LinearLayout _support;
+	private LinearLayout _enquiry;
+	
+	
+	@Override
+	protected int getLayoutID() {
+		// TODO Auto-generated method stub
+		return R.layout.fragment_home;
+	}
+
+	@Override
+	protected void afterSetLayoutID(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void reCreateView() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

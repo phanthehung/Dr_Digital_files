@@ -1,64 +1,49 @@
 package com.khoisang.drdigital.ui;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.webkit.WebView;
 
 import com.khoisang.drdigital.R;
 import com.khoisang.khoisanglibary.ui.fragment.BaseFragment;
 
-public class FragmentSupport extends BaseFragment implements OnClickListener {
+public class FragmentSupport extends BaseFragment {
+	// UI
+	private WebView _webview;
 
-	private TextView _phone_number;
-	private TextView _map;
-	private ImageView _location;
-	private ImageView _information;
-	private ImageView _call_button;
-	
-	@Override
-	public void onClick(View v) {
-		// TODO Auto-generated method stub
-		if (v == _phone_number || v == _call_button) {
-//			String phoneNumb = "tel:+84866605741";
-			String phoneNumb = _phone_number.getText().toString();
-			Intent phone = new Intent(Intent.ACTION_CALL);
-			phone.setData(Uri.parse(phoneNumb));
-			startActivity(phone);
-		}
-		else if (v == _map) {
-		}
-		else if(v == _information)
-		{
-			
-		}
-		else if(v == _location){
-		}
+	private String mContent;
+
+	public FragmentSupport() {
+
+	}
+
+	public FragmentSupport(String content) {
+		mContent = content;
 	}
 
 	@Override
 	protected int getLayoutID() {
-		// TODO Auto-generated method stub
 		return R.layout.fragment_support;
 	}
 
 	@Override
 	protected void afterSetLayoutID(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-		_phone_number.setOnClickListener(this);
-		_call_button.setOnClickListener(this);
-		_information.setOnClickListener(this);
-		_location.setOnClickListener(this);
-		_map.setOnClickListener(this);
+		if (mContent != null) {
+			StringBuilder headString = new StringBuilder();
+			headString
+					.append("<?xml version=\"1.0\" encoding=\"UTF-8\" ?><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /><style>body{font-family:'Arial';}</style></head>");
+			StringBuilder htmlString = new StringBuilder();
+			htmlString.append("<html>" + headString + "<body>" + mContent
+					+ "</body></html>");
+
+			String html = htmlString.toString();
+			_webview.loadData(html, "text/html; charset=utf-8", "UTF-8");
+		}
+		_webview.setBackgroundColor(android.graphics.Color.TRANSPARENT);
 	}
 
 	@Override
 	protected void reCreateView() {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 }

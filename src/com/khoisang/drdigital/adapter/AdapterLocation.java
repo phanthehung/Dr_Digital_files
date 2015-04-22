@@ -6,13 +6,11 @@ public class AdapterLocation extends ListViewItem {
 
 	@Override
 	public void initData(Object own, Object obj, int position) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void setData(Object own, Object obj, int position) {
-		// TODO Auto-generated method stub
 
 	}
 

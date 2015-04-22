@@ -3,7 +3,6 @@ package com.khoisang.drdigital.ui;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
-import android.widget.ImageView;
 
 import com.khoisang.drdigital.R;
 import com.khoisang.khoisanglibary.ui.fragment.BaseFragment;
@@ -11,10 +10,18 @@ import com.khoisang.khoisanglibary.ui.fragment.BaseFragment;
 public class FragmentInformation extends BaseFragment implements
 		android.view.View.OnClickListener {
 
-	private ImageView _support;
-	private ImageView _enquiry;
-	private ImageView _location;
-	private WebView _webview;
+	// UI
+	WebView _webview;
+
+	//
+	private String mContent;
+
+	public FragmentInformation() {
+	}
+
+	public FragmentInformation(String content) {
+		mContent = content;
+	}
 
 	@Override
 	protected int getLayoutID() {
@@ -23,9 +30,18 @@ public class FragmentInformation extends BaseFragment implements
 
 	@Override
 	protected void afterSetLayoutID(Bundle savedInstanceState) {
-		_enquiry.setOnClickListener(this);
-		_location.setOnClickListener(this);
-		_support.setOnClickListener(this);
+		if (mContent != null) {
+			StringBuilder headString = new StringBuilder();
+			headString
+					.append("<?xml version=\"1.0\" encoding=\"UTF-8\" ?><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /><style>body{font-family:'Arial';}</style></head>");
+			StringBuilder htmlString = new StringBuilder();
+			htmlString.append("<html>" + headString + "<body>" + mContent
+					+ "</body></html>");
+
+			String html = htmlString.toString();
+			_webview.loadData(html, "text/html; charset=utf-8", "UTF-8");
+		}
+		_webview.setBackgroundColor(android.graphics.Color.TRANSPARENT);
 	}
 
 	@Override
@@ -35,13 +51,6 @@ public class FragmentInformation extends BaseFragment implements
 
 	@Override
 	public void onClick(View v) {
-		if (v == _enquiry) {
-
-		} else if (v == _location) {
-
-		} else if (v == _support) {
-
-		}
 	}
 
 }

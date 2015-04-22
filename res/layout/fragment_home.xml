@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:weightSum="100" >
 
     <include
         android:layout_width="match_parent"
@@ -22,16 +23,11 @@
         android:layout_height="0dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_weight="14"
+        android:layout_weight="10"
         android:background="@color/red_by_customer"
         android:clickable="true"
         android:orientation="horizontal"
         android:weightSum="100" >
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="5" />
 
         <ImageView
             android:layout_width="0dp"
@@ -39,11 +35,6 @@
             android:layout_margin="3dp"
             android:layout_weight="25"
             android:src="@drawable/phone_icon" />
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="5" />
 
         <TextView
             android:layout_width="0dp"
@@ -54,11 +45,41 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/white"
             android:textStyle="bold" />
+    </LinearLayout>
 
-        <Space
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5" />
+
+    <LinearLayout
+        android:id="@+id/fragment_home_information"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_weight="10"
+        android:background="@color/red_by_customer"
+        android:clickable="true"
+        android:orientation="horizontal"
+        android:weightSum="100" >
+
+        <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="5" />
+            android:layout_margin="3dp"
+            android:layout_weight="25"
+            android:src="@drawable/information_icon" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="45"
+            android:gravity="center"
+            android:text="@string/information"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <Space
@@ -72,16 +93,11 @@
         android:layout_height="0dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_weight="14"
+        android:layout_weight="10"
         android:background="@color/red_by_customer"
         android:clickable="true"
         android:orientation="horizontal"
         android:weightSum="100" >
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="5" />
 
         <ImageView
             android:layout_width="0dp"
@@ -89,11 +105,6 @@
             android:layout_margin="3dp"
             android:layout_weight="25"
             android:src="@drawable/support_icon" />
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="5" />
 
         <TextView
             android:layout_width="0dp"
@@ -104,11 +115,6 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/white"
             android:textStyle="bold" />
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="5" />
     </LinearLayout>
 
     <Space
@@ -122,16 +128,11 @@
         android:layout_height="0dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_weight="14"
+        android:layout_weight="10"
         android:background="@color/red_by_customer"
         android:clickable="true"
         android:orientation="horizontal"
         android:weightSum="100" >
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="5" />
 
         <ImageView
             android:layout_width="0dp"
@@ -139,11 +140,6 @@
             android:layout_margin="3dp"
             android:layout_weight="25"
             android:src="@drawable/location_icon" />
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="5" />
 
         <TextView
             android:layout_width="0dp"
@@ -154,31 +150,24 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/white"
             android:textStyle="bold" />
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="5" />
     </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_gravity="center"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_weight="15"
         android:gravity="center"
         android:text="@string/when_unexpected_failure_occur"
-        android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@color/text_color_by_customer"
         android:textStyle="bold" />
 
-    <View
+    <include
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="0dp"
-        android:layout_weight="8"
-        android:background="@color/red_by_customer"
-        android:padding="0dp" />
+        android:layout_weight="5"
+        layout="@layout/layout_bottom" />
 
 </LinearLayout>

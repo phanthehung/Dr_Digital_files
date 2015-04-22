@@ -14,5 +14,6 @@
     <string name="support_phone_number">tel:+84866605741</string>
     <string name="support_open_time">Opens from 10 a.m to 10 p.m daily</string>
     <string name="find_us">Find us at:</string>
+    <string name="show_map">Show Map</string>
 
 </resources>

@@ -16,13 +16,13 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="75"
-        android:background="@drawable/background"
         android:orientation="vertical" >
 
         <WebView
-            android:id="@+id/fragment_information_webview"
+            android:id="@+id/fragment_enquery_webview"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+
     </LinearLayout>
 
     <include

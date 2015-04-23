@@ -15,5 +15,8 @@
     <string name="support_open_time">Opens from 10 a.m to 10 p.m daily</string>
     <string name="find_us">Find us at:</string>
     <string name="show_map">Show Map</string>
+    <string name="location_name">Location\'s name</string>
+    <string name="location_address">Location Address</string>
+    <string name="location_phone_number">Locations\' phone number</string>
 
 </resources>

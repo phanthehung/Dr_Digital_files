@@ -6,16 +6,16 @@ import android.webkit.WebView;
 import com.khoisang.drdigital.R;
 import com.khoisang.khoisanglibary.ui.fragment.BaseFragment;
 
-public class FragmentEnquery extends BaseFragment {
+public class FragmentEnquiry extends BaseFragment {
 	// UI
 	private WebView _webview;
 
 	private String mContent;
 
-	public FragmentEnquery() {
+	public FragmentEnquiry() {
 	}
 
-	public FragmentEnquery(String content) {
+	public FragmentEnquiry(String content) {
 		mContent = content;
 	}
 

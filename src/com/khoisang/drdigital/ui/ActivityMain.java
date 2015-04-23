@@ -2,7 +2,9 @@ package com.khoisang.drdigital.ui;
 
 import java.io.IOException;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -15,13 +17,20 @@ import android.view.WindowManager;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
+import com.google.gson.Gson;
 import com.khoisang.drdigital.R;
+import com.khoisang.drdigital.api.ApiManager;
+import com.khoisang.drdigital.api.structure.InputGetData;
+import com.khoisang.drdigital.api.structure.OutputGetData;
 import com.khoisang.drdigital.data.Location;
 import com.khoisang.khoisanglibary.dev.DebugLog;
+import com.khoisang.khoisanglibary.network.HttpHandler;
+import com.khoisang.khoisanglibary.network.HttpResult;
 import com.khoisang.khoisanglibary.ui.ActionEvent;
 import com.khoisang.khoisanglibary.ui.activity.BaseActivity;
 
-public class ActivityMain extends BaseActivity implements OnClickListener {
+public class ActivityMain extends BaseActivity implements OnClickListener,
+		HttpHandler {
 
 	public static final String PROJECT_NUMBER_ID = "660565524128";
 	private static final String PROPERTY_REG_ID = "registration_id";
@@ -29,7 +38,7 @@ public class ActivityMain extends BaseActivity implements OnClickListener {
 
 	private FragmentHome mFragmentHome;
 	private FragmentSupport mFragmentSupport;
-	private FragmentEnquery mFragmentEnquery;
+	private FragmentEnquiry mFragmentEnquiry;
 	private FragmentLocation mFragmentLocation;
 	private FragmentInformation mFragmentInformation;
 
@@ -48,7 +57,7 @@ public class ActivityMain extends BaseActivity implements OnClickListener {
 			replaceFragment(mFragmentSupport, R.id.activity_main_content, true);
 			break;
 		case 2:
-			replaceFragment(mFragmentEnquery, R.id.activity_main_content, true);
+			replaceFragment(mFragmentEnquiry, R.id.activity_main_content, true);
 			break;
 		case 3:
 			replaceFragment(mFragmentLocation, R.id.activity_main_content, true);
@@ -73,26 +82,21 @@ public class ActivityMain extends BaseActivity implements OnClickListener {
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-		initFragments();
-	}
-
-	private void initFragments() {
-		mFragmentHome = new FragmentHome();
-		mFragmentSupport = new FragmentSupport();
-		mFragmentEnquery = new FragmentEnquery();
-		mFragmentLocation = new FragmentLocation();
-		mFragmentInformation = new FragmentInformation();
 	}
 
 	@Override
 	protected void afterSetLayoutID(Bundle savedInstanceState) {
+		mFragmentHome = new FragmentHome();
 		addFragment(mFragmentHome, R.id.activity_main_content);
+
 		if (checkPlayServices() == true) {
 			mGoogleCloudMessage = GoogleCloudMessaging
 					.getInstance(getApplicationContext());
 			mRegId = getRegistrationId(getApplicationContext());
 			if (mRegId.equalsIgnoreCase("") == true) {
 				registerInBackground();
+			} else {
+				callFirstApi(mRegId);
 			}
 		}
 	}
@@ -144,6 +148,7 @@ public class ActivityMain extends BaseActivity implements OnClickListener {
 					}
 					mRegId = mGoogleCloudMessage.register(PROJECT_NUMBER_ID);
 					storeRegistrationId(ActivityMain.this, mRegId);
+					callFirstApi(mRegId);
 				} catch (IOException ex) {
 					DebugLog.e(getTag(), ex);
 				}
@@ -151,5 +156,57 @@ public class ActivityMain extends BaseActivity implements OnClickListener {
 			}
 		};
 		asyncTask.execute();
+	}
+
+	private void callFirstApi(String deviceId) {
+		showIndicator("loading...", false);
+
+		InputGetData inputGetData = new InputGetData();
+		inputGetData.deviceID = deviceId;
+		ApiManager.getData(inputGetData, this);
+	}
+
+	private void handleError(Exception ex) {
+		new AlertDialog.Builder(this)
+				.setTitle("Error")
+				.setMessage("Application will be close")
+				.setPositiveButton(android.R.string.yes,
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int which) {
+								dialog.dismiss();
+								ActivityMain.this.finish();
+							}
+						}).show();
+	}
+
+	@Override
+	public void prePrequest(int ID, int Name, Object holder) {
+	}
+
+	@Override
+	public void handleException(int ID, int Name, Exception ex, Object holder) {
+		DebugLog.e(getTag(), ex);
+		handleError(ex);
+	}
+
+	@Override
+	public void handleCancel(int ID, int Name, Object holder) {
+
+	}
+
+	@Override
+	public void handleResult(int ID, int Name, HttpResult httpResult,
+			String bodyString, Object holder) {
+		DebugLog.i(getTag(), bodyString);
+		OutputGetData outputGetData = new Gson().fromJson(bodyString,
+				OutputGetData.class);
+
+		mFragmentSupport = new FragmentSupport(outputGetData.support);
+		mFragmentEnquiry = new FragmentEnquiry(outputGetData.enquiry);
+		mFragmentLocation = new FragmentLocation(outputGetData.location);
+		mFragmentInformation = new FragmentInformation(outputGetData.info);
+
+		hideIndicator();
 	}
 }

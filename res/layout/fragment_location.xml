@@ -22,12 +22,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/find_us"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/black" />
 
         <ListView
             android:id="@+id/fragment_location_address_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent"
+            android:divider="@null"
+            android:dividerHeight="10dp" >
         </ListView>
     </LinearLayout>
 

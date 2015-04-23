@@ -1,10 +1,15 @@
 package com.khoisang.drdigital.ui;
 
 import android.app.IntentService;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Vibrator;
+import android.support.v4.app.NotificationCompat;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
+import com.khoisang.drdigital.R;
 
 public class ServiceIntentGCM extends IntentService {
 
@@ -24,8 +29,25 @@ public class ServiceIntentGCM extends IntentService {
 					.equals(messageType)) {
 			} else if (GoogleCloudMessaging.MESSAGE_TYPE_MESSAGE
 					.equals(messageType)) {
+				String title = intent.getExtras().getString("title");
+				String message = intent.getExtras().getString("message");
+
+				generateNotification(getApplicationContext(), title, message);
 			}
 		}
 		BroadcastReceiverGcm.completeWakefulIntent(intent);
+	}
+
+	private void generateNotification(Context context, String title,
+			String message) {
+		Vibrator vibrator = (Vibrator) context
+				.getSystemService(Context.VIBRATOR_SERVICE);
+		vibrator.vibrate(500);
+		NotificationCompat.Builder builder = new NotificationCompat.Builder(
+				context).setSmallIcon(R.drawable.ic_launcher)
+				.setContentTitle(title).setContentText(message);
+		NotificationManager notificationManager = (NotificationManager) context
+				.getSystemService(Context.NOTIFICATION_SERVICE);
+		notificationManager.notify(0, builder.build());
 	}
 }

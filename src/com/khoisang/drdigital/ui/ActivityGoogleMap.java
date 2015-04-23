@@ -28,7 +28,7 @@ public class ActivityGoogleMap extends BaseActivity implements
 
 	@Override
 	protected int getLayoutID() {
-		return 0;
+		return R.layout.activity_googlemap;
 	}
 
 	@Override
@@ -59,10 +59,11 @@ public class ActivityGoogleMap extends BaseActivity implements
 			mGoogleMap.setTrafficEnabled(true);
 			mGoogleMap.setOnCameraChangeListener(this);
 
-			if (Location != null)
+			if (Location != null) {
 				mGoogleMap.addMarker(new MarkerOptions().position(
-						new LatLng(Location.x, Location.y)).title(
-						Location.BrandName));
+						new LatLng(Location.latitude, Location.longitude))
+						.title(Location.locationName));
+			}
 
 			// Setting
 			// UiSettings mUiSettings = mGoogleMap.getUiSettings();

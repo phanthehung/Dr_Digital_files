@@ -3,9 +3,7 @@ package com.khoisang.drdigital.ui;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 
 import com.khoisang.drdigital.R;
@@ -14,29 +12,26 @@ import com.khoisang.drdigital.data.Location;
 import com.khoisang.khoisanglibary.ui.ListViewItem;
 import com.khoisang.khoisanglibary.ui.fragment.ListViewFragment;
 
-public class FragmentLocation extends ListViewFragment implements
-		OnClickListener {
+public class FragmentLocation extends ListViewFragment {
 
 	private ArrayList<Object> mListLocation;
+
+	private ArrayList<Object> getListLocation() {
+		if (mListLocation == null)
+			mListLocation = new ArrayList<>();
+		return mListLocation;
+	}
 
 	public FragmentLocation() {
 	}
 
 	public FragmentLocation(List<Location> listLocation) {
-		mListLocation.addAll(listLocation);
-	}
-
-	@Override
-	public void onClick(View v) {
+		getListLocation().addAll(listLocation);
 	}
 
 	@Override
 	protected int getLayoutID() {
 		return R.layout.fragment_location;
-	}
-
-	@Override
-	protected void afterSetLayoutID(Bundle savedInstanceState) {
 	}
 
 	@Override
@@ -55,7 +50,7 @@ public class FragmentLocation extends ListViewFragment implements
 
 	@Override
 	protected ArrayList<Object> getDataToListView() {
-		return mListLocation;
+		return getListLocation();
 	}
 
 	@Override

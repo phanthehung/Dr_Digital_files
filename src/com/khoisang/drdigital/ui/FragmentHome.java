@@ -2,14 +2,12 @@ package com.khoisang.drdigital.ui;
 
 import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 
 import com.khoisang.drdigital.R;
 import com.khoisang.khoisanglibary.ui.ActionEvent;
-import com.khoisang.khoisanglibary.ui.fragment.BaseFragment;
 
-public class FragmentHome extends BaseFragment implements OnClickListener {
+public class FragmentHome extends DrDigitalBasegFragment {
 
 	private LinearLayout _location;
 	private LinearLayout _support;
@@ -23,6 +21,8 @@ public class FragmentHome extends BaseFragment implements OnClickListener {
 
 	@Override
 	protected void afterSetLayoutID(Bundle savedInstanceState) {
+		super.afterSetLayoutID(savedInstanceState);
+
 		_location.setOnClickListener(this);
 		_support.setOnClickListener(this);
 		_enquiry.setOnClickListener(this);
@@ -35,6 +35,7 @@ public class FragmentHome extends BaseFragment implements OnClickListener {
 
 	@Override
 	public void onClick(View v) {
+		super.onClick(v);
 		if (v == _support) {
 			raiseEvent(new ActionEvent(1, null));
 		} else if (v == _enquiry) {

@@ -5,10 +5,8 @@ import android.view.View;
 import android.webkit.WebView;
 
 import com.khoisang.drdigital.R;
-import com.khoisang.khoisanglibary.ui.fragment.BaseFragment;
 
-public class FragmentInformation extends BaseFragment implements
-		android.view.View.OnClickListener {
+public class FragmentInformation extends DrDigitalBasegFragment {
 
 	// UI
 	WebView _webview;
@@ -30,6 +28,7 @@ public class FragmentInformation extends BaseFragment implements
 
 	@Override
 	protected void afterSetLayoutID(Bundle savedInstanceState) {
+		super.afterSetLayoutID(savedInstanceState);
 		if (mContent != null) {
 			StringBuilder headString = new StringBuilder();
 			headString
@@ -51,6 +50,7 @@ public class FragmentInformation extends BaseFragment implements
 
 	@Override
 	public void onClick(View v) {
+		super.onClick(v);
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.khoisang.drdigital.ui;
 
 import java.io.IOException;
+import java.util.List;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -23,7 +24,10 @@ import com.khoisang.drdigital.api.ApiManager;
 import com.khoisang.drdigital.api.structure.InputGetData;
 import com.khoisang.drdigital.api.structure.OutputGetData;
 import com.khoisang.drdigital.data.Location;
+import com.khoisang.drdigital.data.Notification;
+import com.khoisang.drdigital.util.History;
 import com.khoisang.khoisanglibary.dev.DebugLog;
+import com.khoisang.khoisanglibary.dev.ExceptionToMessage;
 import com.khoisang.khoisanglibary.network.HttpHandler;
 import com.khoisang.khoisanglibary.network.HttpResult;
 import com.khoisang.khoisanglibary.ui.ActionEvent;
@@ -41,6 +45,7 @@ public class ActivityMain extends BaseActivity implements OnClickListener,
 	private FragmentEnquiry mFragmentEnquiry;
 	private FragmentLocation mFragmentLocation;
 	private FragmentInformation mFragmentInformation;
+	private FragmentNotification mFragmentNotification;
 
 	private GoogleCloudMessaging mGoogleCloudMessage;
 	private String mRegId;
@@ -71,6 +76,19 @@ public class ActivityMain extends BaseActivity implements OnClickListener,
 			Location location = (Location) actionEvent.parameters;
 			ActivityGoogleMap.Location = location;
 			startActivity(intent);
+			break;
+		case 6:
+			List<Notification> listNotifications = null;
+			try {
+				listNotifications = History.get(getApplication());
+			} catch (IOException ex) {
+				// Not Found
+			}
+			mFragmentNotification.setListNotification(listNotifications);
+			replaceFragment(mFragmentNotification, R.id.activity_main_content,
+					true);
+
+			break;
 		default:
 			break;
 		}
@@ -86,6 +104,7 @@ public class ActivityMain extends BaseActivity implements OnClickListener,
 
 	@Override
 	protected void afterSetLayoutID(Bundle savedInstanceState) {
+		mFragmentNotification = new FragmentNotification();
 		mFragmentHome = new FragmentHome();
 		addFragment(mFragmentHome, R.id.activity_main_content);
 
@@ -96,7 +115,11 @@ public class ActivityMain extends BaseActivity implements OnClickListener,
 			if (mRegId.equalsIgnoreCase("") == true) {
 				registerInBackground();
 			} else {
-				callFirstApi(mRegId);
+				try {
+					callFirstApi(mRegId);
+				} catch (Exception ex) {
+					handleError(ex);
+				}
 			}
 		}
 	}
@@ -149,8 +172,8 @@ public class ActivityMain extends BaseActivity implements OnClickListener,
 					mRegId = mGoogleCloudMessage.register(PROJECT_NUMBER_ID);
 					storeRegistrationId(ActivityMain.this, mRegId);
 					callFirstApi(mRegId);
-				} catch (IOException ex) {
-					DebugLog.e(getTag(), ex);
+				} catch (Exception ex) {
+					handleError(ex);
 				}
 				return msg;
 			}
@@ -158,26 +181,39 @@ public class ActivityMain extends BaseActivity implements OnClickListener,
 		asyncTask.execute();
 	}
 
-	private void callFirstApi(String deviceId) {
-		showIndicator("loading...", false);
+	private void callFirstApi(final String deviceId) throws Exception {
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				showIndicator("loading...", false);
 
-		InputGetData inputGetData = new InputGetData();
-		inputGetData.deviceID = deviceId;
-		ApiManager.getData(inputGetData, this);
+				InputGetData inputGetData = new InputGetData();
+				inputGetData.deviceID = deviceId;
+				ApiManager.getData(inputGetData, ActivityMain.this);
+			}
+		});
+
 	}
 
-	private void handleError(Exception ex) {
-		new AlertDialog.Builder(this)
-				.setTitle("Error")
-				.setMessage("Application will be close")
-				.setPositiveButton(android.R.string.yes,
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog,
-									int which) {
-								dialog.dismiss();
-								ActivityMain.this.finish();
-							}
-						}).show();
+	private void handleError(final Exception ex) {
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				String message = ExceptionToMessage.getMessage(getResources(),
+						ex);
+				new AlertDialog.Builder(ActivityMain.this)
+						.setTitle("Error")
+						.setMessage(message)
+						.setPositiveButton(android.R.string.yes,
+								new DialogInterface.OnClickListener() {
+									public void onClick(DialogInterface dialog,
+											int which) {
+										dialog.dismiss();
+										ActivityMain.this.finish();
+									}
+								}).show();
+			}
+		});
 	}
 
 	@Override
@@ -199,14 +235,16 @@ public class ActivityMain extends BaseActivity implements OnClickListener,
 	public void handleResult(int ID, int Name, HttpResult httpResult,
 			String bodyString, Object holder) {
 		DebugLog.i(getTag(), bodyString);
-		OutputGetData outputGetData = new Gson().fromJson(bodyString,
-				OutputGetData.class);
-
-		mFragmentSupport = new FragmentSupport(outputGetData.support);
-		mFragmentEnquiry = new FragmentEnquiry(outputGetData.enquiry);
-		mFragmentLocation = new FragmentLocation(outputGetData.location);
-		mFragmentInformation = new FragmentInformation(outputGetData.info);
-
-		hideIndicator();
+		try {
+			OutputGetData outputGetData = new Gson().fromJson(bodyString,
+					OutputGetData.class);
+			mFragmentSupport = new FragmentSupport(outputGetData.support);
+			mFragmentEnquiry = new FragmentEnquiry(outputGetData.enquiry);
+			mFragmentLocation = new FragmentLocation(outputGetData.location);
+			mFragmentInformation = new FragmentInformation(outputGetData.info);
+			hideIndicator();
+		} catch (Exception ex) {
+			handleError(ex);
+		}
 	}
 }

@@ -1,5 +1,7 @@
 package com.khoisang.drdigital.ui;
 
+import java.io.IOException;
+
 import android.app.IntentService;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -10,6 +12,7 @@ import android.support.v4.app.NotificationCompat;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.khoisang.drdigital.R;
+import com.khoisang.drdigital.util.History;
 
 public class ServiceIntentGCM extends IntentService {
 
@@ -31,8 +34,13 @@ public class ServiceIntentGCM extends IntentService {
 					.equals(messageType)) {
 				String title = intent.getExtras().getString("title");
 				String message = intent.getExtras().getString("message");
-
-				generateNotification(getApplicationContext(), title, message);
+				try {
+					generateNotification(getApplicationContext(), title,
+							message);
+					History.save(getApplication(), title, message);
+				} catch (IOException e) {
+					// Ignore
+				}
 			}
 		}
 		BroadcastReceiverGcm.completeWakefulIntent(intent);

@@ -4,9 +4,8 @@ import android.os.Bundle;
 import android.webkit.WebView;
 
 import com.khoisang.drdigital.R;
-import com.khoisang.khoisanglibary.ui.fragment.BaseFragment;
 
-public class FragmentSupport extends BaseFragment {
+public class FragmentSupport extends DrDigitalBasegFragment {
 	// UI
 	private WebView _webview;
 
@@ -27,6 +26,7 @@ public class FragmentSupport extends BaseFragment {
 
 	@Override
 	protected void afterSetLayoutID(Bundle savedInstanceState) {
+		super.afterSetLayoutID(savedInstanceState);
 		if (mContent != null) {
 			StringBuilder headString = new StringBuilder();
 			headString

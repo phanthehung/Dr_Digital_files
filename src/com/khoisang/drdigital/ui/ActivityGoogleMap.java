@@ -6,20 +6,25 @@ import android.os.Bundle;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnCameraChangeListener;
 import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
+import com.google.android.gms.maps.GoogleMap.OnMapLoadedCallback;
 import com.google.android.gms.maps.GoogleMap.OnMapLongClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMyLocationChangeListener;
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.maps.android.SphericalUtil;
 import com.khoisang.drdigital.R;
 import com.khoisang.khoisanglibary.ui.ActionEvent;
 import com.khoisang.khoisanglibary.ui.activity.BaseActivity;
 
 public class ActivityGoogleMap extends BaseActivity implements
 		OnMapReadyCallback, OnMyLocationChangeListener, OnMapLongClickListener,
-		OnMapClickListener, OnCameraChangeListener {
+		OnMapClickListener, OnCameraChangeListener, OnMapLoadedCallback {
 
 	public static final String KEY = "location";
 
@@ -55,15 +60,10 @@ public class ActivityGoogleMap extends BaseActivity implements
 			mGoogleMap.setOnMyLocationChangeListener(this);
 			mGoogleMap.setOnMapLongClickListener(this);
 			mGoogleMap.setOnMapClickListener(this);
+			mGoogleMap.setOnMapLoadedCallback(this);
 			mGoogleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 			mGoogleMap.setTrafficEnabled(true);
 			mGoogleMap.setOnCameraChangeListener(this);
-
-			if (Location != null) {
-				mGoogleMap.addMarker(new MarkerOptions().position(
-						new LatLng(Location.latitude, Location.longitude))
-						.title(Location.locationName));
-			}
 
 			// Setting
 			// UiSettings mUiSettings = mGoogleMap.getUiSettings();
@@ -91,6 +91,25 @@ public class ActivityGoogleMap extends BaseActivity implements
 
 	@Override
 	public void onMyLocationChange(Location arg0) {
+	}
+
+	@Override
+	public void onMapLoaded() {
+		if (Location != null) {
+			LatLng latLng = new LatLng(Location.latitude, Location.longitude);
+			mGoogleMap.addMarker(new MarkerOptions().position(latLng).title(
+					Location.locationName));
+			int distance = 1000;
+			LatLngBounds latLngBounds = new LatLngBounds.Builder()
+					.include(SphericalUtil.computeOffset(latLng, distance, 0))
+					.include(SphericalUtil.computeOffset(latLng, distance, 90))
+					.include(SphericalUtil.computeOffset(latLng, distance, 180))
+					.include(SphericalUtil.computeOffset(latLng, distance, 270))
+					.build();
+			CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngBounds(
+					latLngBounds, 10);
+			mGoogleMap.moveCamera(cameraUpdate);
+		}
 	}
 
 }

@@ -23,6 +23,7 @@ import com.khoisang.drdigital.R;
 import com.khoisang.drdigital.api.ApiManager;
 import com.khoisang.drdigital.api.structure.InputGetData;
 import com.khoisang.drdigital.api.structure.OutputGetData;
+import com.khoisang.drdigital.constant.Event;
 import com.khoisang.drdigital.data.Location;
 import com.khoisang.drdigital.data.Notification;
 import com.khoisang.drdigital.util.History;
@@ -88,6 +89,24 @@ public class ActivityMain extends BaseActivity implements OnClickListener,
 			replaceFragment(mFragmentNotification, R.id.activity_main_content,
 					true);
 
+			break;
+		case Event.SUPPORT_NON_BACK:
+			clearFragmentBackStack();
+			replaceFragment(mFragmentSupport, R.id.activity_main_content, false);
+			break;
+		case Event.INFORMATION_NON_BACK:
+			clearFragmentBackStack();
+			replaceFragment(mFragmentInformation, R.id.activity_main_content,
+					false);
+			break;
+		case Event.ENQUIRY_NON_BACK:
+			clearFragmentBackStack();
+			replaceFragment(mFragmentEnquiry, R.id.activity_main_content, false);
+			break;
+		case Event.LOCATION_NON_BACK:
+			clearFragmentBackStack();
+			replaceFragment(mFragmentLocation, R.id.activity_main_content,
+					false);
 			break;
 		default:
 			break;

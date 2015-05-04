@@ -7,7 +7,7 @@ import android.widget.LinearLayout;
 import com.khoisang.drdigital.R;
 import com.khoisang.khoisanglibary.ui.ActionEvent;
 
-public class FragmentHome extends DrDigitalBasegFragment {
+public class FragmentHome extends BaseFragmentDrDigital {
 
 	private LinearLayout _location;
 	private LinearLayout _support;

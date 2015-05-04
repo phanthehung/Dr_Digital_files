@@ -15,7 +15,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="75"
+        android:layout_weight="65"
         android:background="@drawable/background"
         android:orientation="vertical" >
 
@@ -28,7 +28,7 @@
     <include
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="5"
+        android:layout_weight="15"
         layout="@layout/layout_bottom" />
 
 </LinearLayout>

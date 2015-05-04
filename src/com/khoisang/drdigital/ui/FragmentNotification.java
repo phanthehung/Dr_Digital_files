@@ -38,6 +38,7 @@ public class FragmentNotification extends ListViewFragment {
 		super.afterSetLayoutID(savedInstanceState);
 		mImageViewBell = (ImageView) findViewById(R.id.layout_header_bell);
 		mImageViewBell.setVisibility(View.INVISIBLE);
+
 	}
 
 	@Override

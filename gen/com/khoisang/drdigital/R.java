@@ -2212,17 +2212,17 @@ containing a value of this type.
         public static final int common_signin_btn_text_normal_light=0x7f02004e;
         public static final int common_signin_btn_text_pressed_dark=0x7f02004f;
         public static final int common_signin_btn_text_pressed_light=0x7f020050;
-        public static final int header=0x7f020051;
-        public static final int ic_launcher=0x7f020052;
-        public static final int ic_menu_chat_has_message=0x7f020053;
-        public static final int ic_plusone_medium_off_client=0x7f020054;
-        public static final int ic_plusone_small_off_client=0x7f020055;
-        public static final int ic_plusone_standard_off_client=0x7f020056;
-        public static final int ic_plusone_tall_off_client=0x7f020057;
-        public static final int information_icon=0x7f020058;
-        public static final int khoisang_empty_photo=0x7f020059;
-        public static final int location_icon=0x7f02005a;
-        public static final int phone_icon=0x7f02005b;
+        public static final int enquiry_icon=0x7f020051;
+        public static final int header=0x7f020052;
+        public static final int ic_launcher=0x7f020053;
+        public static final int ic_menu_chat_has_message=0x7f020054;
+        public static final int ic_plusone_medium_off_client=0x7f020055;
+        public static final int ic_plusone_small_off_client=0x7f020056;
+        public static final int ic_plusone_standard_off_client=0x7f020057;
+        public static final int ic_plusone_tall_off_client=0x7f020058;
+        public static final int information_icon=0x7f020059;
+        public static final int khoisang_empty_photo=0x7f02005a;
+        public static final int location_icon=0x7f02005b;
         public static final int powered_by_google_dark=0x7f02005c;
         public static final int powered_by_google_light=0x7f02005d;
         public static final int support_icon=0x7f02005e;
@@ -2241,7 +2241,7 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f0c0045;
         public static final int action_mode_bar_stub=0x7f0c0044;
         public static final int action_mode_close_button=0x7f0c0037;
-        public static final int action_settings=0x7f0c0075;
+        public static final int action_settings=0x7f0c0078;
         public static final int activity_chooser_view_content=0x7f0c0038;
         public static final int activity_main_content=0x7f0c0057;
         public static final int activity_navigation_drawer_menu_double_content=0x7f0c0059;
@@ -2278,7 +2278,7 @@ containing a value of this type.
         public static final int end=0x7f0c0031;
         public static final int expand_activities_button=0x7f0c0039;
         public static final int expanded_menu=0x7f0c003f;
-        public static final int fragment_enquery_webview=0x7f0c0064;
+        public static final int fragment_enquiry_webview=0x7f0c0064;
         public static final int fragment_googlemap_map=0x7f0c0056;
         public static final int fragment_home_enquiry=0x7f0c0067;
         public static final int fragment_home_information=0x7f0c0066;
@@ -2304,7 +2304,10 @@ containing a value of this type.
         public static final int item_notification_message=0x7f0c0073;
         public static final int item_notification_time=0x7f0c0072;
         public static final int item_notification_title=0x7f0c0071;
-        public static final int layout_header_bell=0x7f0c0074;
+        public static final int layout_bottom_1=0x7f0c0074;
+        public static final int layout_bottom_2=0x7f0c0075;
+        public static final int layout_bottom_3=0x7f0c0076;
+        public static final int layout_header_bell=0x7f0c0077;
         public static final int listMode=0x7f0c0021;
         public static final int list_item=0x7f0c003c;
         public static final int match_parent=0x7f0c0018;
@@ -2402,7 +2405,7 @@ containing a value of this type.
         public static final int activity_navigation_drawer_menu_double=0x7f030019;
         public static final int activity_navigation_drawer_menu_listview=0x7f03001a;
         public static final int activity_navigation_drawer_menu_single=0x7f03001b;
-        public static final int fragment_enquery=0x7f03001c;
+        public static final int fragment_enquiry=0x7f03001c;
         public static final int fragment_home=0x7f03001d;
         public static final int fragment_information=0x7f03001e;
         public static final int fragment_location=0x7f03001f;
@@ -2411,9 +2414,10 @@ containing a value of this type.
         public static final int item_location=0x7f030022;
         public static final int item_notification=0x7f030023;
         public static final int layout_bottom=0x7f030024;
-        public static final int layout_header=0x7f030025;
-        public static final int support_simple_spinner_dropdown_item=0x7f030026;
-        public static final int text_bubble=0x7f030027;
+        public static final int layout_bottom_non_option=0x7f030025;
+        public static final int layout_header=0x7f030026;
+        public static final int support_simple_spinner_dropdown_item=0x7f030027;
+        public static final int text_bubble=0x7f030028;
     }
     public static final class menu {
         public static final int main=0x7f0d0000;

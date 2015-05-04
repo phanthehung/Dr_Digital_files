@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -28,6 +29,7 @@ import com.khoisang.drdigital.data.Location;
 import com.khoisang.drdigital.data.Notification;
 import com.khoisang.drdigital.util.History;
 import com.khoisang.khoisanglibary.dev.DebugLog;
+import com.khoisang.khoisanglibary.dev.DebugLog.DebugLogListerner;
 import com.khoisang.khoisanglibary.dev.ExceptionToMessage;
 import com.khoisang.khoisanglibary.network.HttpHandler;
 import com.khoisang.khoisanglibary.network.HttpResult;
@@ -35,7 +37,7 @@ import com.khoisang.khoisanglibary.ui.ActionEvent;
 import com.khoisang.khoisanglibary.ui.activity.BaseActivity;
 
 public class ActivityMain extends BaseActivity implements OnClickListener,
-		HttpHandler {
+		HttpHandler, DebugLogListerner {
 
 	public static final String PROJECT_NUMBER_ID = "660565524128";
 	private static final String PROPERTY_REG_ID = "registration_id";
@@ -83,7 +85,7 @@ public class ActivityMain extends BaseActivity implements OnClickListener,
 			try {
 				listNotifications = History.get(getApplication());
 			} catch (IOException ex) {
-				// Not Found
+				DebugLog.e(getTag(), ex);
 			}
 			mFragmentNotification.setListNotification(listNotifications);
 			replaceFragment(mFragmentNotification, R.id.activity_main_content,
@@ -123,6 +125,8 @@ public class ActivityMain extends BaseActivity implements OnClickListener,
 
 	@Override
 	protected void afterSetLayoutID(Bundle savedInstanceState) {
+		DebugLog.setListerner(this);
+
 		mFragmentNotification = new FragmentNotification();
 		mFragmentHome = new FragmentHome();
 		addFragment(mFragmentHome, R.id.activity_main_content);
@@ -201,26 +205,26 @@ public class ActivityMain extends BaseActivity implements OnClickListener,
 	}
 
 	private void callFirstApi(final String deviceId) throws Exception {
-		runOnUiThread(new Runnable() {
+		new Handler().postDelayed(new Runnable() {
+
 			@Override
 			public void run() {
-				showIndicator("loading...", false);
-
 				InputGetData inputGetData = new InputGetData();
 				inputGetData.deviceID = deviceId;
 				ApiManager.getData(inputGetData, ActivityMain.this);
 			}
-		});
-
+		}, 500);
 	}
 
 	private void handleError(final Exception ex) {
-		runOnUiThread(new Runnable() {
+		new Handler().postDelayed(new Runnable() {
+
 			@Override
 			public void run() {
 				String message = ExceptionToMessage.getMessage(getResources(),
 						ex);
-				new AlertDialog.Builder(ActivityMain.this)
+				new AlertDialog.Builder(ActivityMain.this
+						.getApplicationContext())
 						.setTitle("Error")
 						.setMessage(message)
 						.setPositiveButton(android.R.string.yes,
@@ -232,7 +236,7 @@ public class ActivityMain extends BaseActivity implements OnClickListener,
 									}
 								}).show();
 			}
-		});
+		}, 1000);
 	}
 
 	@Override
@@ -265,5 +269,9 @@ public class ActivityMain extends BaseActivity implements OnClickListener,
 		} catch (Exception ex) {
 			handleError(ex);
 		}
+	}
+
+	@Override
+	public void debugLogHandlerError(Exception ex) {
 	}
 }

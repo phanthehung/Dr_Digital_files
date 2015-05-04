@@ -26,7 +26,7 @@ public class History {
 
 		com.khoisang.khoisanglibary.dev.FileWriter fileWriter = new com.khoisang.khoisanglibary.dev.FileWriter(
 				application, FILE_NAME);
-		String message = fileWriter.get();
+		String message = fileWriter.get(false);
 		if (message != null && message.equalsIgnoreCase("") == false) {
 			String[] arrayNotification = message.split("\n");
 			for (int i = 0; arrayNotification != null

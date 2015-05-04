@@ -11,7 +11,8 @@
         android:paddingTop="5dp"
         android:text="@string/location_name"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/Black" />
+        android:textColor="@color/Black"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/item_location_map"

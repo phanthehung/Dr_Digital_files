@@ -25,7 +25,7 @@
             android:text="@string/find_us"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/black"
-            android:textStyle="normal" />
+            android:textStyle="bold" />
 
         <ListView
             android:id="@+id/fragment_location_address_list"

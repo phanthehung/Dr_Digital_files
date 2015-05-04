@@ -29,6 +29,7 @@ public class FragmentNotification extends ListViewFragment {
 	}
 
 	public void setListNotification(List<Notification> listNotification) {
+		getListNotification().clear();
 		if (listNotification != null && listNotification.size() > 0)
 			getListNotification().addAll(listNotification);
 	}

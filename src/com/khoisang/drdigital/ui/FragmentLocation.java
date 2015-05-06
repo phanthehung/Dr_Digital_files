@@ -82,6 +82,9 @@ public class FragmentLocation extends ListViewFragment implements
 
 		mImageViewBell = (ImageView) findViewById(R.id.layout_header_bell);
 		mImageViewBell.setOnClickListener(this);
+
+		if (getListLocation().size() == 0)
+			showToast("Not found", false);
 	}
 
 	@Override
@@ -91,6 +94,8 @@ public class FragmentLocation extends ListViewFragment implements
 
 	@Override
 	protected void reCreateView() {
+		if (getListLocation().size() == 0)
+			showToast("Not found", false);
 	}
 
 	@Override

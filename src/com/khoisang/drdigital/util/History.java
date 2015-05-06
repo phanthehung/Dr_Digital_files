@@ -2,6 +2,7 @@ package com.khoisang.drdigital.util;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -13,19 +14,21 @@ public class History {
 	private static final String FILE_NAME = "History";
 
 	public static void save(Application application, String title,
-			String message) throws IOException {
+			String message, long timeStamp) throws IOException {
 		com.khoisang.khoisanglibary.dev.FileWriter fileWriter = new com.khoisang.khoisanglibary.dev.FileWriter(
 				application, FILE_NAME);
 		fileWriter.write(title + ";" + message + ";"
-				+ String.valueOf(new Date().getTime()) + "\n");
+				+ String.valueOf(timeStamp * 1000) + "\n");
 	}
 
 	public static List<Notification> get(Application application)
 			throws IOException {
 		List<Notification> listNotification = new ArrayList<Notification>();
-
 		com.khoisang.khoisanglibary.dev.FileWriter fileWriter = new com.khoisang.khoisanglibary.dev.FileWriter(
 				application, FILE_NAME);
+		if (fileWriter.isExist() == false)
+			return null;
+
 		String message = fileWriter.get(false);
 		if (message != null && message.equalsIgnoreCase("") == false) {
 			String[] arrayNotification = message.split("\n");
@@ -40,7 +43,7 @@ public class History {
 					notification.title = stringNotificationSplit[0];
 					notification.message = stringNotificationSplit[1];
 					try {
-						notification.time = Integer
+						notification.time = Long
 								.valueOf(stringNotificationSplit[2]);
 					} catch (Exception ex) {
 						// Ignore
@@ -50,6 +53,7 @@ public class History {
 				}
 			} // End For
 		} // End If
+		Collections.reverse(listNotification);
 		return listNotification;
 	}
 }

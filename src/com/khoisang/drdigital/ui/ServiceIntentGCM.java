@@ -3,7 +3,9 @@ package com.khoisang.drdigital.ui;
 import java.io.IOException;
 
 import android.app.IntentService;
+import android.app.Notification;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +17,7 @@ import com.khoisang.drdigital.R;
 import com.khoisang.drdigital.util.History;
 
 public class ServiceIntentGCM extends IntentService {
+	public static final String KEY = "ServiceIntentGCM";
 
 	public ServiceIntentGCM() {
 		super(ActivityMain.PROJECT_NUMBER_ID);
@@ -34,10 +37,12 @@ public class ServiceIntentGCM extends IntentService {
 					.equals(messageType)) {
 				String title = intent.getExtras().getString("title");
 				String message = intent.getExtras().getString("message");
+				String timeString = intent.getExtras().getString("time");
 				try {
 					generateNotification(getApplicationContext(), title,
 							message);
-					History.save(getApplication(), title, message);
+					History.save(getApplication(), title, message,
+							Long.valueOf(timeString));
 				} catch (IOException e) {
 					// Ignore
 				}
@@ -51,11 +56,22 @@ public class ServiceIntentGCM extends IntentService {
 		Vibrator vibrator = (Vibrator) context
 				.getSystemService(Context.VIBRATOR_SERVICE);
 		vibrator.vibrate(500);
+
+		Intent intent = new Intent(this, ActivityMain.class);
+		intent.putExtra(KEY, "true");
+
+		PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
+				intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
 		NotificationCompat.Builder builder = new NotificationCompat.Builder(
 				context).setSmallIcon(R.drawable.ic_launcher)
-				.setContentTitle(title).setContentText(message);
+				.setContentTitle(title).setContentText(message)
+				.setDefaults(Notification.DEFAULT_ALL)
+				.setWhen(System.currentTimeMillis())
+				.setContentIntent(contentIntent);
+
 		NotificationManager notificationManager = (NotificationManager) context
 				.getSystemService(Context.NOTIFICATION_SERVICE);
-		notificationManager.notify(0, builder.build());
+		notificationManager.notify(1, builder.build());
 	}
 }

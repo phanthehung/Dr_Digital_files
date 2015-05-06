@@ -40,6 +40,8 @@ public class FragmentNotification extends ListViewFragment {
 		mImageViewBell = (ImageView) findViewById(R.id.layout_header_bell);
 		mImageViewBell.setVisibility(View.INVISIBLE);
 
+		if (getListNotification().size() == 0)
+			showToast("Not found", false);
 	}
 
 	@Override
@@ -74,6 +76,8 @@ public class FragmentNotification extends ListViewFragment {
 
 	@Override
 	protected void reCreateView() {
+		if (getListNotification().size() == 0)
+			showToast("Not found", false);
 	}
 
 }

@@ -36,9 +36,7 @@
         android:id="@+id/item_location_phone_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="5dp"
-        android:text="@string/location_phone_number"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/Black" />
+        android:autoLink="all"
+        android:paddingTop="5dp" />
 
 </LinearLayout>

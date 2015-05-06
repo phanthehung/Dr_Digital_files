@@ -1,6 +1,6 @@
 package com.khoisang.drdigital.ui;
 
-import java.io.IOException;
+import java.net.UnknownHostException;
 import java.util.List;
 
 import android.app.AlertDialog;
@@ -35,6 +35,7 @@ import com.khoisang.khoisanglibary.network.HttpHandler;
 import com.khoisang.khoisanglibary.network.HttpResult;
 import com.khoisang.khoisanglibary.ui.ActionEvent;
 import com.khoisang.khoisanglibary.ui.activity.BaseActivity;
+import com.khoisang.khoisanglibary.util.NetwordUtil;
 
 public class ActivityMain extends BaseActivity implements OnClickListener,
 		HttpHandler, DebugLogListerner {
@@ -84,8 +85,8 @@ public class ActivityMain extends BaseActivity implements OnClickListener,
 			List<Notification> listNotifications = null;
 			try {
 				listNotifications = History.get(getApplication());
-			} catch (IOException ex) {
-				DebugLog.e(getTag(), ex);
+			} catch (Exception ex) {
+				handleError(ex);
 			}
 			mFragmentNotification.setListNotification(listNotifications);
 			replaceFragment(mFragmentNotification, R.id.activity_main_content,
@@ -120,7 +121,6 @@ public class ActivityMain extends BaseActivity implements OnClickListener,
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 	}
 
 	@Override
@@ -130,6 +130,11 @@ public class ActivityMain extends BaseActivity implements OnClickListener,
 		mFragmentNotification = new FragmentNotification();
 		mFragmentHome = new FragmentHome();
 		addFragment(mFragmentHome, R.id.activity_main_content);
+
+		if (NetwordUtil.isNetworkAvailable(this) == false) {
+			handleError(new UnknownHostException());
+			return;
+		}
 
 		if (checkPlayServices() == true) {
 			mGoogleCloudMessage = GoogleCloudMessaging
@@ -149,6 +154,17 @@ public class ActivityMain extends BaseActivity implements OnClickListener,
 
 	@Override
 	public void onClick(View v) {
+	}
+
+	@Override
+	protected void onNewIntent(Intent intent) {
+		processIntent(intent);
+	};
+
+	private void processIntent(Intent intent) {
+		if (intent.hasExtra(ServiceIntentGCM.KEY) == true) {
+			handleEvent(new ActionEvent(6, null));
+		}
 	}
 
 	private boolean checkPlayServices() {
@@ -194,7 +210,17 @@ public class ActivityMain extends BaseActivity implements OnClickListener,
 					}
 					mRegId = mGoogleCloudMessage.register(PROJECT_NUMBER_ID);
 					storeRegistrationId(ActivityMain.this, mRegId);
-					callFirstApi(mRegId);
+
+					runOnUiThread(new Runnable() {
+						@Override
+						public void run() {
+							try {
+								callFirstApi(mRegId);
+							} catch (Exception ex) {
+								handleError(ex);
+							}
+						}
+					});
 				} catch (Exception ex) {
 					handleError(ex);
 				}
@@ -206,25 +232,24 @@ public class ActivityMain extends BaseActivity implements OnClickListener,
 
 	private void callFirstApi(final String deviceId) throws Exception {
 		new Handler().postDelayed(new Runnable() {
-
 			@Override
 			public void run() {
+				showIndicator("loading", false);
 				InputGetData inputGetData = new InputGetData();
 				inputGetData.deviceID = deviceId;
 				ApiManager.getData(inputGetData, ActivityMain.this);
 			}
-		}, 500);
+		}, 100);
 	}
 
 	private void handleError(final Exception ex) {
 		new Handler().postDelayed(new Runnable() {
-
 			@Override
 			public void run() {
-				String message = ExceptionToMessage.getMessage(getResources(),
-						ex);
-				new AlertDialog.Builder(ActivityMain.this
-						.getApplicationContext())
+				DebugLog.e(ActivityMain.this.getTag(), ex);
+				String message = ExceptionToMessage.getMessage(
+						ActivityMain.this.getResources(), ex);
+				new AlertDialog.Builder(ActivityMain.this)
 						.setTitle("Error")
 						.setMessage(message)
 						.setPositiveButton(android.R.string.yes,
@@ -235,8 +260,9 @@ public class ActivityMain extends BaseActivity implements OnClickListener,
 										ActivityMain.this.finish();
 									}
 								}).show();
+
 			}
-		}, 1000);
+		}, 100);
 	}
 
 	@Override
@@ -244,14 +270,20 @@ public class ActivityMain extends BaseActivity implements OnClickListener,
 	}
 
 	@Override
-	public void handleException(int ID, int Name, Exception ex, Object holder) {
-		DebugLog.e(getTag(), ex);
-		handleError(ex);
+	public void handleException(int ID, int Name, final Exception ex,
+			Object holder) {
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				hideIndicator();
+				handleError(ex);
+			}
+		});
 	}
 
 	@Override
 	public void handleCancel(int ID, int Name, Object holder) {
-
+		hideIndicator();
 	}
 
 	@Override
@@ -259,13 +291,15 @@ public class ActivityMain extends BaseActivity implements OnClickListener,
 			String bodyString, Object holder) {
 		DebugLog.i(getTag(), bodyString);
 		try {
+			hideIndicator();
 			OutputGetData outputGetData = new Gson().fromJson(bodyString,
 					OutputGetData.class);
 			mFragmentSupport = new FragmentSupport(outputGetData.support);
 			mFragmentEnquiry = new FragmentEnquiry(outputGetData.enquiry);
 			mFragmentLocation = new FragmentLocation(outputGetData.location);
 			mFragmentInformation = new FragmentInformation(outputGetData.info);
-			hideIndicator();
+			//
+			processIntent(getIntent());
 		} catch (Exception ex) {
 			handleError(ex);
 		}

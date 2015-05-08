@@ -54,6 +54,55 @@ public class ActivityMain extends BaseActivity implements OnClickListener,
 	private GoogleCloudMessaging mGoogleCloudMessage;
 	private String mRegId;
 
+	public FragmentHome getmFragmentHome() {
+		return mFragmentHome;
+	}
+
+	public void setmFragmentHome(FragmentHome mFragmentHome) {
+		this.mFragmentHome = mFragmentHome;
+	}
+
+	public FragmentSupport getmFragmentSupport() {
+		return mFragmentSupport;
+	}
+
+	public void setmFragmentSupport(FragmentSupport mFragmentSupport) {
+		this.mFragmentSupport = mFragmentSupport;
+	}
+
+	public FragmentEnquiry getmFragmentEnquiry() {
+		return mFragmentEnquiry;
+	}
+
+	public void setmFragmentEnquiry(FragmentEnquiry mFragmentEnquiry) {
+		this.mFragmentEnquiry = mFragmentEnquiry;
+	}
+
+	public FragmentLocation getmFragmentLocation() {
+		return mFragmentLocation;
+	}
+
+	public void setmFragmentLocation(FragmentLocation mFragmentLocation) {
+		this.mFragmentLocation = mFragmentLocation;
+	}
+
+	public FragmentInformation getmFragmentInformation() {
+		return mFragmentInformation;
+	}
+
+	public void setmFragmentInformation(FragmentInformation mFragmentInformation) {
+		this.mFragmentInformation = mFragmentInformation;
+	}
+
+	public FragmentNotification getmFragmentNotification() {
+		return mFragmentNotification;
+	}
+
+	public void setmFragmentNotification(
+			FragmentNotification mFragmentNotification) {
+		this.mFragmentNotification = mFragmentNotification;
+	}
+
 	@Override
 	protected int getLayoutID() {
 		return R.layout.activity_main;

@@ -26,6 +26,18 @@ public class FragmentInformation extends BaseFragmentDrDigital {
 		mContent = content;
 	}
 
+	public WebView getWebView() {
+		return this._webview;
+	}
+
+	public String getmContent() {
+		return mContent;
+	}
+
+	public void setmContent(String mContent) {
+		this.mContent = mContent;
+	}
+
 	@Override
 	protected int getLayoutID() {
 		return R.layout.fragment_information;

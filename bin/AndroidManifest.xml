@@ -6,6 +6,10 @@
 
     <uses-sdk android:minSdkVersion="8" />
 
+    <instrumentation
+        android:name="android.test.InstrumentationTestRunner"
+        android:targetPackage="com.khoisang.drdigital" />
+
     <permission
         android:name="com.khoisang.phonerepair.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
@@ -69,6 +73,8 @@
         </receiver>
 
         <service android:name="com.khoisang.drdigital.ui.ServiceIntentGCM" />
+
+        <uses-library android:name="android.test.runner" />
     </application>
 
 </manifest>

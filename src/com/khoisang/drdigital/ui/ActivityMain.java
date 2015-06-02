@@ -11,7 +11,6 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -38,12 +37,7 @@ import com.khoisang.khoisanglibary.ui.ActionEvent;
 import com.khoisang.khoisanglibary.ui.activity.BaseActivity;
 import com.khoisang.khoisanglibary.util.NetwordUtil;
 
-<<<<<<< Updated upstream
-public class ActivityMain extends BaseActivity implements OnClickListener,
-HttpHandler, DebugLogListerner {
-=======
 public class ActivityMain extends BaseActivity implements OnClickListener, HttpHandler, DebugLogListerner {
->>>>>>> Stashed changes
 
 	public static final String PROJECT_NUMBER_ID = "660565524128";
 	private static final String PROPERTY_REG_ID = "registration_id";
@@ -179,8 +173,7 @@ public class ActivityMain extends BaseActivity implements OnClickListener, HttpH
 				handleError(ex);
 			}
 			mFragmentNotification.setListNotification(listNotifications_non_back);
-			replaceFragment(mFragmentNotification, R.id.activity_main_content,
-					true);
+			replaceFragment(mFragmentNotification, R.id.activity_main_content, true);
 
 			break;
 		default:
@@ -270,7 +263,7 @@ public class ActivityMain extends BaseActivity implements OnClickListener, HttpH
 			protected String doInBackground(Void... params) {
 				String msg = "";
 				try {
-					
+
 					if (mGoogleCloudMessage == null) {
 						mGoogleCloudMessage = GoogleCloudMessaging.getInstance(ActivityMain.this);
 					}
@@ -313,21 +306,9 @@ public class ActivityMain extends BaseActivity implements OnClickListener, HttpH
 			@Override
 			public void run() {
 				DebugLog.e(ActivityMain.this.getTag(), ex);
-<<<<<<< Updated upstream
-				String message = ExceptionToMessage.getMessage(
-						ActivityMain.this.getResources(), ex);
-				new AlertDialog.Builder(ActivityMain.this)
-				.setTitle("Error")
-				.setMessage(message)
-				.setPositiveButton(android.R.string.yes,
-						new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog,
-							int which) {
-=======
 				String message = ExceptionToMessage.getMessage(ActivityMain.this.getResources(), ex);
 				new AlertDialog.Builder(ActivityMain.this).setTitle("Error").setMessage(message).setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
->>>>>>> Stashed changes
 						dialog.dismiss();
 						ActivityMain.this.finish();
 					}

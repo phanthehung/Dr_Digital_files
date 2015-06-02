@@ -46,8 +46,7 @@ public class FragmentHome extends BaseFragmentDrDigital {
 			raiseEvent(new ActionEvent(3, null));
 		} else if (v == _information) {
 			raiseEvent(new ActionEvent(4, null));
-		}
-		else if(v == _notification){
+		} else if (v == _notification) {
 			raiseEvent(new ActionEvent(6, null));
 		}
 	}

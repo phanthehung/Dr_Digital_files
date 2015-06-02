@@ -81,23 +81,20 @@ public class FragmentInformation extends BaseFragmentDrDigital {
 
 			}
 		});
-		
+
 		mBottomOption4 = (ImageView) findViewById(R.id.layout_bottom_4);
-		mBottomOption4.setImageDrawable(getResources().getDrawable(
-				R.drawable.notification_icon));
+		mBottomOption4.setImageDrawable(getResources().getDrawable(R.drawable.notification_icon));
 		mBottomOption4.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				FragmentInformation.this.raiseEvent(new ActionEvent(
-						Event.NOTIFICATION_NON_BACK, null));
+				FragmentInformation.this.raiseEvent(new ActionEvent(Event.NOTIFICATION_NON_BACK, null));
 			}
 		});
-		
+
 		txtCounter = (TextView) findViewById(R.id.txtCounter);
 		if (DrDigitalApplication.counter == 0) {
 			txtCounter.setVisibility(View.GONE);
-		}
-		else{
+		} else {
 			txtCounter.setVisibility(View.VISIBLE);
 			txtCounter.setText(String.valueOf(DrDigitalApplication.counter));
 		}

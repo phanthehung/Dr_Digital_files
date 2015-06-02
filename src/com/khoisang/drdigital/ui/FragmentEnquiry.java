@@ -63,27 +63,23 @@ public class FragmentEnquiry extends BaseFragmentDrDigital {
 				FragmentEnquiry.this.raiseEvent(new ActionEvent(Event.LOCATION_NON_BACK, null));
 			}
 		});
-		
+
 		mBottomOption4 = (ImageView) findViewById(R.id.layout_bottom_4);
-		mBottomOption4.setImageDrawable(getResources().getDrawable(
-				R.drawable.notification_icon));
+		mBottomOption4.setImageDrawable(getResources().getDrawable(R.drawable.notification_icon));
 		mBottomOption4.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				FragmentEnquiry.this.raiseEvent(new ActionEvent(
-						Event.NOTIFICATION_NON_BACK, null));
+				FragmentEnquiry.this.raiseEvent(new ActionEvent(Event.NOTIFICATION_NON_BACK, null));
 			}
 		});
-		
+
 		txtCounter = (TextView) findViewById(R.id.txtCounter);
 		if (DrDigitalApplication.counter == 0) {
 			txtCounter.setVisibility(View.GONE);
-		}
-		else{
+		} else {
 			txtCounter.setVisibility(View.VISIBLE);
 			txtCounter.setText(String.valueOf(DrDigitalApplication.counter));
 		}
-		
 
 		if (mContent != null) {
 			StringBuilder headString = new StringBuilder();

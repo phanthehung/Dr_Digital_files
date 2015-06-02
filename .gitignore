@@ -26,3 +26,15 @@
 *.ap_
 
 *.apk
+
+*.ap_
+
+.classpath
+
+*.dex
+
+*.apk
+
+*.txt
+
+*.properties

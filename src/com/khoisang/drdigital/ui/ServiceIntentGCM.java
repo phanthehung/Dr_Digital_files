@@ -1,21 +1,16 @@
 package com.khoisang.drdigital.ui;
 
 import java.io.IOException;
-import java.security.acl.NotOwnerException;
 
 import android.app.IntentService;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
-import android.widget.TextView;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.khoisang.drdigital.R;
@@ -24,6 +19,7 @@ import com.khoisang.drdigital.util.History;
 public class ServiceIntentGCM extends IntentService {
 	public static final String KEY = "ServiceIntentGCM";
 	public static final String NOTIFICATION_COUNTER = "notification_counter";
+
 	public ServiceIntentGCM() {
 		super(ActivityMain.PROJECT_NUMBER_ID);
 	}
@@ -51,35 +47,19 @@ public class ServiceIntentGCM extends IntentService {
 		BroadcastReceiverGcm.completeWakefulIntent(intent);
 	}
 
-<<<<<<< Updated upstream
-
-	private void generateNotification(Context context, String title,
-			String message) {
-		Vibrator vibrator = (Vibrator) context
-				.getSystemService(Context.VIBRATOR_SERVICE);
-=======
 	private void generateNotification(Context context, String title, String message) {
 		Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
->>>>>>> Stashed changes
 		vibrator.vibrate(500);
 
 		DrDigitalApplication.counter++;
-		
+
 		Intent intent = new Intent(this, ActivityMain.class);
 		intent.putExtra(KEY, "true");
 
 		PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
 		NotificationCompat.Builder builder = new NotificationCompat.Builder(context).setSmallIcon(R.drawable.ic_launcher).setContentTitle(title).setContentText(message).setDefaults(Notification.DEFAULT_ALL).setWhen(System.currentTimeMillis()).setContentIntent(contentIntent);
-
-<<<<<<< Updated upstream
-		
-		
-		NotificationManager notificationManager = (NotificationManager) context
-				.getSystemService(Context.NOTIFICATION_SERVICE);
-=======
 		NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
->>>>>>> Stashed changes
 		notificationManager.notify(1, builder.build());
 	}
 }

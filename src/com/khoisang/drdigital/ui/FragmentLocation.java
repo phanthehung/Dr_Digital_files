@@ -75,23 +75,20 @@ public class FragmentLocation extends ListViewFragment implements OnClickListene
 				FragmentLocation.this.raiseEvent(new ActionEvent(Event.ENQUIRY_NON_BACK, null));
 			}
 		});
-		
+
 		mBottomOption4 = (ImageView) findViewById(R.id.layout_bottom_4);
-		mBottomOption4.setImageDrawable(getResources().getDrawable(
-				R.drawable.notification_icon));
+		mBottomOption4.setImageDrawable(getResources().getDrawable(R.drawable.notification_icon));
 		mBottomOption4.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				FragmentLocation.this.raiseEvent(new ActionEvent(
-						Event.NOTIFICATION_NON_BACK, null));
+				FragmentLocation.this.raiseEvent(new ActionEvent(Event.NOTIFICATION_NON_BACK, null));
 			}
 		});
-		
+
 		txtCounter = (TextView) findViewById(R.id.txtCounter);
 		if (DrDigitalApplication.counter == 0) {
 			txtCounter.setVisibility(View.INVISIBLE);
-		}
-		else{
+		} else {
 			txtCounter.setVisibility(View.GONE);
 			txtCounter.setText(String.valueOf(DrDigitalApplication.counter));
 		}

@@ -65,15 +65,13 @@ public class FragmentSupport extends BaseFragmentDrDigital {
 				FragmentSupport.this.raiseEvent(new ActionEvent(Event.LOCATION_NON_BACK, null));
 			}
 		});
-		
+
 		mBottomOption4 = (ImageView) findViewById(R.id.layout_bottom_4);
-		mBottomOption4.setImageDrawable(getResources().getDrawable(
-				R.drawable.notification_icon));
+		mBottomOption4.setImageDrawable(getResources().getDrawable(R.drawable.notification_icon));
 		mBottomOption4.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				FragmentSupport.this.raiseEvent(new ActionEvent(
-						Event.NOTIFICATION_NON_BACK, null));
+				FragmentSupport.this.raiseEvent(new ActionEvent(Event.NOTIFICATION_NON_BACK, null));
 			}
 		});
 

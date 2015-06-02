@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.khoisang.drdigital.R;
 import com.khoisang.drdigital.adapter.AdapterLocation;
@@ -24,6 +25,8 @@ public class FragmentLocation extends ListViewFragment implements
 	private ImageView mBottomOption1;
 	private ImageView mBottomOption2;
 	private ImageView mBottomOption3;
+	private ImageView mBottomOption4;
+	private TextView txtCounter;
 
 	private ArrayList<Object> mListLocation;
 
@@ -79,6 +82,26 @@ public class FragmentLocation extends ListViewFragment implements
 						Event.ENQUIRY_NON_BACK, null));
 			}
 		});
+		
+		mBottomOption4 = (ImageView) findViewById(R.id.layout_bottom_4);
+		mBottomOption4.setImageDrawable(getResources().getDrawable(
+				R.drawable.notification_icon));
+		mBottomOption4.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				FragmentLocation.this.raiseEvent(new ActionEvent(
+						Event.NOTIFICATION_NON_BACK, null));
+			}
+		});
+		
+		txtCounter = (TextView) findViewById(R.id.txtCounter);
+		if (DrDigitalApplication.counter == 0) {
+			txtCounter.setVisibility(View.INVISIBLE);
+		}
+		else{
+			txtCounter.setVisibility(View.GONE);
+			txtCounter.setText(String.valueOf(DrDigitalApplication.counter));
+		}
 
 		mImageViewBell = (ImageView) findViewById(R.id.layout_header_bell);
 		mImageViewBell.setOnClickListener(this);

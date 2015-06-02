@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.khoisang.drdigital.R;
 import com.khoisang.drdigital.constant.Event;
@@ -15,6 +16,8 @@ public class FragmentEnquiry extends BaseFragmentDrDigital {
 	private ImageView mBottomOption1;
 	private ImageView mBottomOption2;
 	private ImageView mBottomOption3;
+	private ImageView mBottomOption4;
+	private TextView txtCounter;
 
 	private String mContent;
 
@@ -66,6 +69,27 @@ public class FragmentEnquiry extends BaseFragmentDrDigital {
 						Event.LOCATION_NON_BACK, null));
 			}
 		});
+		
+		mBottomOption4 = (ImageView) findViewById(R.id.layout_bottom_4);
+		mBottomOption4.setImageDrawable(getResources().getDrawable(
+				R.drawable.notification_icon));
+		mBottomOption4.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				FragmentEnquiry.this.raiseEvent(new ActionEvent(
+						Event.NOTIFICATION_NON_BACK, null));
+			}
+		});
+		
+		txtCounter = (TextView) findViewById(R.id.txtCounter);
+		if (DrDigitalApplication.counter == 0) {
+			txtCounter.setVisibility(View.GONE);
+		}
+		else{
+			txtCounter.setVisibility(View.VISIBLE);
+			txtCounter.setText(String.valueOf(DrDigitalApplication.counter));
+		}
+		
 
 		if (mContent != null) {
 			StringBuilder headString = new StringBuilder();

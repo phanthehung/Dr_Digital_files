@@ -13,6 +13,7 @@ public class FragmentHome extends BaseFragmentDrDigital {
 	private LinearLayout _support;
 	private LinearLayout _enquiry;
 	private LinearLayout _information;
+	private LinearLayout _notification;
 
 	@Override
 	protected int getLayoutID() {
@@ -27,6 +28,7 @@ public class FragmentHome extends BaseFragmentDrDigital {
 		_support.setOnClickListener(this);
 		_enquiry.setOnClickListener(this);
 		_information.setOnClickListener(this);
+		_notification.setOnClickListener(this);
 	}
 
 	@Override
@@ -44,6 +46,9 @@ public class FragmentHome extends BaseFragmentDrDigital {
 			raiseEvent(new ActionEvent(3, null));
 		} else if (v == _information) {
 			raiseEvent(new ActionEvent(4, null));
+		}
+		else if(v == _notification){
+			raiseEvent(new ActionEvent(6, null));
 		}
 	}
 

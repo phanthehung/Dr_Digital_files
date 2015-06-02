@@ -11,6 +11,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -38,7 +39,7 @@ import com.khoisang.khoisanglibary.ui.activity.BaseActivity;
 import com.khoisang.khoisanglibary.util.NetwordUtil;
 
 public class ActivityMain extends BaseActivity implements OnClickListener,
-		HttpHandler, DebugLogListerner {
+HttpHandler, DebugLogListerner {
 
 	public static final String PROJECT_NUMBER_ID = "660565524128";
 	private static final String PROPERTY_REG_ID = "registration_id";
@@ -51,6 +52,7 @@ public class ActivityMain extends BaseActivity implements OnClickListener,
 	private FragmentInformation mFragmentInformation;
 	private FragmentNotification mFragmentNotification;
 
+	private int mNotificationCounter = 0;
 	private GoogleCloudMessaging mGoogleCloudMessage;
 	private String mRegId;
 
@@ -108,6 +110,14 @@ public class ActivityMain extends BaseActivity implements OnClickListener,
 		return R.layout.activity_main;
 	}
 
+	public int getmNotificationCounter() {
+		return mNotificationCounter;
+	}
+
+	public void setmNotificationCounter(int mNotificationCounter) {
+		this.mNotificationCounter = mNotificationCounter;
+	}
+
 	@Override
 	public void handleEvent(ActionEvent actionEvent) {
 		switch (actionEvent.eventID) {
@@ -131,6 +141,7 @@ public class ActivityMain extends BaseActivity implements OnClickListener,
 			startActivity(intent);
 			break;
 		case 6:
+			DrDigitalApplication.counter = 0;
 			List<Notification> listNotifications = null;
 			try {
 				listNotifications = History.get(getApplication());
@@ -160,6 +171,19 @@ public class ActivityMain extends BaseActivity implements OnClickListener,
 			replaceFragment(mFragmentLocation, R.id.activity_main_content,
 					false);
 			break;
+		case Event.NOTIFICATION_NON_BACK:
+			DrDigitalApplication.counter = 0;
+			List<Notification> listNotifications_non_back = null;
+			try {
+				listNotifications_non_back = History.get(getApplication());
+			} catch (Exception ex) {
+				handleError(ex);
+			}
+			mFragmentNotification.setListNotification(listNotifications_non_back);
+			replaceFragment(mFragmentNotification, R.id.activity_main_content,
+					true);
+
+			break;
 		default:
 			break;
 		}
@@ -175,7 +199,6 @@ public class ActivityMain extends BaseActivity implements OnClickListener,
 	@Override
 	protected void afterSetLayoutID(Bundle savedInstanceState) {
 		DebugLog.setListerner(this);
-
 		mFragmentNotification = new FragmentNotification();
 		mFragmentHome = new FragmentHome();
 		addFragment(mFragmentHome, R.id.activity_main_content);
@@ -253,6 +276,7 @@ public class ActivityMain extends BaseActivity implements OnClickListener,
 			protected String doInBackground(Void... params) {
 				String msg = "";
 				try {
+					
 					if (mGoogleCloudMessage == null) {
 						mGoogleCloudMessage = GoogleCloudMessaging
 								.getInstance(ActivityMain.this);
@@ -299,16 +323,16 @@ public class ActivityMain extends BaseActivity implements OnClickListener,
 				String message = ExceptionToMessage.getMessage(
 						ActivityMain.this.getResources(), ex);
 				new AlertDialog.Builder(ActivityMain.this)
-						.setTitle("Error")
-						.setMessage(message)
-						.setPositiveButton(android.R.string.yes,
-								new DialogInterface.OnClickListener() {
-									public void onClick(DialogInterface dialog,
-											int which) {
-										dialog.dismiss();
-										ActivityMain.this.finish();
-									}
-								}).show();
+				.setTitle("Error")
+				.setMessage(message)
+				.setPositiveButton(android.R.string.yes,
+						new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog,
+							int which) {
+						dialog.dismiss();
+						ActivityMain.this.finish();
+					}
+				}).show();
 
 			}
 		}, 100);

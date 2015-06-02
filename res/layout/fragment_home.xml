@@ -9,13 +9,13 @@
     <include
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="20"
+        android:layout_weight="17"
         layout="@layout/layout_header" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="5" />
+        android:layout_weight="4" />
 
     <LinearLayout
         android:id="@+id/fragment_home_support"
@@ -23,7 +23,7 @@
         android:layout_height="0dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_weight="10"
+        android:layout_weight="9"
         android:background="@color/red_by_customer"
         android:clickable="true"
         android:orientation="horizontal"
@@ -50,7 +50,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="5" />
+        android:layout_weight="4" />
 
     <LinearLayout
         android:id="@+id/fragment_home_information"
@@ -58,7 +58,7 @@
         android:layout_height="0dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_weight="10"
+        android:layout_weight="9"
         android:background="@color/red_by_customer"
         android:clickable="true"
         android:orientation="horizontal"
@@ -85,7 +85,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="5" />
+        android:layout_weight="4" />
 
     <LinearLayout
         android:id="@+id/fragment_home_enquiry"
@@ -93,7 +93,7 @@
         android:layout_height="0dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_weight="10"
+        android:layout_weight="9"
         android:background="@color/red_by_customer"
         android:clickable="true"
         android:orientation="horizontal"
@@ -120,7 +120,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="5" />
+        android:layout_weight="4" />
 
     <LinearLayout
         android:id="@+id/fragment_home_location"
@@ -128,7 +128,7 @@
         android:layout_height="0dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_weight="10"
+        android:layout_weight="9"
         android:background="@color/red_by_customer"
         android:clickable="true"
         android:orientation="horizontal"
@@ -152,13 +152,48 @@
             android:textStyle="bold" />
     </LinearLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4" />
+
+    <LinearLayout
+        android:id="@+id/fragment_home_notification"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_weight="9"
+        android:background="@color/red_by_customer"
+        android:clickable="true"
+        android:orientation="horizontal"
+        android:weightSum="100" >
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="3dp"
+            android:layout_weight="25"
+            android:src="@drawable/notification_icon" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="45"
+            android:gravity="center"
+            android:text="@string/notification"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+    </LinearLayout>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="center"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_weight="15"
+        android:layout_weight="14"
         android:gravity="center"
         android:text="@string/when_unexpected_failure_occur"
         android:textColor="@color/text_color_by_customer"
@@ -167,7 +202,7 @@
     <include
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="5"
+        android:layout_weight="4"
         layout="@layout/layout_bottom_non_option" />
 
 </LinearLayout>

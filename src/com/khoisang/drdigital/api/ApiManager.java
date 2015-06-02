@@ -11,12 +11,10 @@ import com.khoisang.khoisanglibary.network.HttpHandler;
 import com.khoisang.khoisanglibary.network.HttpManager;
 
 public class ApiManager {
-	public static void getData(InputGetData inputGetData,
-			HttpHandler httpHandler) {
+	public static void getData(InputGetData inputGetData, HttpHandler httpHandler) {
 		String json = new Gson().toJson(inputGetData);
 		HttpManager httpManager = new HttpManager();
-		MultipartEntityBuilder multipartEntityBuilder = MultipartEntityBuilder
-				.create();
+		MultipartEntityBuilder multipartEntityBuilder = MultipartEntityBuilder.create();
 		multipartEntityBuilder.addTextBody("data", json);
 
 		Uri.Builder builder = new Builder();
@@ -24,7 +22,6 @@ public class ApiManager {
 		builder.encodedAuthority("tongkho.info");
 		builder.encodedPath("drdigital/api/getData");
 
-		httpManager.post(1, null, builder.build(), httpHandler, null,
-				multipartEntityBuilder, 1);
+		httpManager.post(1, null, builder.build(), httpHandler, null, multipartEntityBuilder, 1);
 	}
 }

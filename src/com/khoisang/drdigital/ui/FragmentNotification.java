@@ -115,8 +115,7 @@ public class FragmentNotification extends ListViewFragment {
 	}
 
 	@Override
-	protected void onClick(AdapterView<?> listView, View itemView,
-			int position, Object obj) {
+	protected void onClick(AdapterView<?> listView, View itemView, int position, Object obj) {
 	}
 
 	@Override

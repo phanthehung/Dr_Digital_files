@@ -22,9 +22,7 @@ import com.khoisang.drdigital.R;
 import com.khoisang.khoisanglibary.ui.ActionEvent;
 import com.khoisang.khoisanglibary.ui.activity.BaseActivity;
 
-public class ActivityGoogleMap extends BaseActivity implements
-		OnMapReadyCallback, OnMyLocationChangeListener, OnMapLongClickListener,
-		OnMapClickListener, OnCameraChangeListener, OnMapLoadedCallback {
+public class ActivityGoogleMap extends BaseActivity implements OnMapReadyCallback, OnMyLocationChangeListener, OnMapLongClickListener, OnMapClickListener, OnCameraChangeListener, OnMapLoadedCallback {
 
 	public static final String KEY = "location";
 
@@ -38,8 +36,7 @@ public class ActivityGoogleMap extends BaseActivity implements
 
 	@Override
 	protected void afterSetLayoutID(Bundle savedInstanceState) {
-		SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-				.findFragmentById(R.id.fragment_googlemap_map);
+		SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_googlemap_map);
 		mapFragment.getMapAsync(this);
 	}
 
@@ -97,17 +94,10 @@ public class ActivityGoogleMap extends BaseActivity implements
 	public void onMapLoaded() {
 		if (Location != null) {
 			LatLng latLng = new LatLng(Location.latitude, Location.longitude);
-			mGoogleMap.addMarker(new MarkerOptions().position(latLng).title(
-					Location.locationName));
+			mGoogleMap.addMarker(new MarkerOptions().position(latLng).title(Location.locationName));
 			int distance = 1000;
-			LatLngBounds latLngBounds = new LatLngBounds.Builder()
-					.include(SphericalUtil.computeOffset(latLng, distance, 0))
-					.include(SphericalUtil.computeOffset(latLng, distance, 90))
-					.include(SphericalUtil.computeOffset(latLng, distance, 180))
-					.include(SphericalUtil.computeOffset(latLng, distance, 270))
-					.build();
-			CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngBounds(
-					latLngBounds, 10);
+			LatLngBounds latLngBounds = new LatLngBounds.Builder().include(SphericalUtil.computeOffset(latLng, distance, 0)).include(SphericalUtil.computeOffset(latLng, distance, 90)).include(SphericalUtil.computeOffset(latLng, distance, 180)).include(SphericalUtil.computeOffset(latLng, distance, 270)).build();
+			CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngBounds(latLngBounds, 10);
 			mGoogleMap.moveCamera(cameraUpdate);
 		}
 	}

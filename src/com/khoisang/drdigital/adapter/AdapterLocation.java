@@ -25,8 +25,7 @@ public class AdapterLocation extends ListViewItem implements OnClickListener {
 
 	@Override
 	public void initData(Object own, Object obj, int position) {
-		mFragmentLocation = new WeakReference<FragmentLocation>(
-				(FragmentLocation) own);
+		mFragmentLocation = new WeakReference<FragmentLocation>((FragmentLocation) own);
 		_map.setOnClickListener(this);
 	}
 
@@ -42,8 +41,7 @@ public class AdapterLocation extends ListViewItem implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		if (mFragmentLocation != null && mFragmentLocation.get() != null) {
-			ActivityMain activityMain = (ActivityMain) mFragmentLocation.get()
-					.getActivity();
+			ActivityMain activityMain = (ActivityMain) mFragmentLocation.get().getActivity();
 			activityMain.handleEvent(new ActionEvent(5, mLocation));
 		}
 	}

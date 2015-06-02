@@ -34,20 +34,15 @@ public class ServiceIntentGCM extends IntentService {
 		GoogleCloudMessaging gcm = GoogleCloudMessaging.getInstance(this);
 		String messageType = gcm.getMessageType(intent);
 		if (!extras.isEmpty()) {
-			if (GoogleCloudMessaging.MESSAGE_TYPE_SEND_ERROR
-					.equals(messageType)) {
-			} else if (GoogleCloudMessaging.MESSAGE_TYPE_DELETED
-					.equals(messageType)) {
-			} else if (GoogleCloudMessaging.MESSAGE_TYPE_MESSAGE
-					.equals(messageType)) {
+			if (GoogleCloudMessaging.MESSAGE_TYPE_SEND_ERROR.equals(messageType)) {
+			} else if (GoogleCloudMessaging.MESSAGE_TYPE_DELETED.equals(messageType)) {
+			} else if (GoogleCloudMessaging.MESSAGE_TYPE_MESSAGE.equals(messageType)) {
 				String title = intent.getExtras().getString("title");
 				String message = intent.getExtras().getString("message");
 				String timeString = intent.getExtras().getString("time");
 				try {
-					generateNotification(getApplicationContext(), title,
-							message);
-					History.save(getApplication(), title, message,
-							Long.valueOf(timeString));
+					generateNotification(getApplicationContext(), title, message);
+					History.save(getApplication(), title, message, Long.valueOf(timeString));
 				} catch (IOException e) {
 					// Ignore
 				}
@@ -56,11 +51,16 @@ public class ServiceIntentGCM extends IntentService {
 		BroadcastReceiverGcm.completeWakefulIntent(intent);
 	}
 
+<<<<<<< Updated upstream
 
 	private void generateNotification(Context context, String title,
 			String message) {
 		Vibrator vibrator = (Vibrator) context
 				.getSystemService(Context.VIBRATOR_SERVICE);
+=======
+	private void generateNotification(Context context, String title, String message) {
+		Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+>>>>>>> Stashed changes
 		vibrator.vibrate(500);
 
 		DrDigitalApplication.counter++;
@@ -68,20 +68,18 @@ public class ServiceIntentGCM extends IntentService {
 		Intent intent = new Intent(this, ActivityMain.class);
 		intent.putExtra(KEY, "true");
 
-		PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
-				intent, PendingIntent.FLAG_UPDATE_CURRENT);
+		PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-		NotificationCompat.Builder builder = new NotificationCompat.Builder(
-				context).setSmallIcon(R.drawable.ic_launcher)
-				.setContentTitle(title).setContentText(message)
-				.setDefaults(Notification.DEFAULT_ALL)
-				.setWhen(System.currentTimeMillis())
-				.setContentIntent(contentIntent);
+		NotificationCompat.Builder builder = new NotificationCompat.Builder(context).setSmallIcon(R.drawable.ic_launcher).setContentTitle(title).setContentText(message).setDefaults(Notification.DEFAULT_ALL).setWhen(System.currentTimeMillis()).setContentIntent(contentIntent);
 
+<<<<<<< Updated upstream
 		
 		
 		NotificationManager notificationManager = (NotificationManager) context
 				.getSystemService(Context.NOTIFICATION_SERVICE);
+=======
+		NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+>>>>>>> Stashed changes
 		notificationManager.notify(1, builder.build());
 	}
 }

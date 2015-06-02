@@ -29,8 +29,7 @@ public class FragmentInformationTest extends ActivityInstrumentationTestCase2 {
 	protected void setUp() throws Exception {
 		super.setUp();
 		activity = (ActivityMain) getActivity();
-		mGoogleCloudMessage = GoogleCloudMessaging.getInstance(activity
-				.getApplicationContext());
+		mGoogleCloudMessage = GoogleCloudMessaging.getInstance(activity.getApplicationContext());
 		registerInBackground();
 		Thread.sleep(3000);
 		fragmentInformation = activity.getmFragmentInformation();
@@ -48,8 +47,7 @@ public class FragmentInformationTest extends ActivityInstrumentationTestCase2 {
 				String msg = "";
 				try {
 					if (mGoogleCloudMessage == null) {
-						mGoogleCloudMessage = GoogleCloudMessaging
-								.getInstance(activity);
+						mGoogleCloudMessage = GoogleCloudMessaging.getInstance(activity);
 					}
 					mRegId = mGoogleCloudMessage.register(PROJECT_NUMBER_ID);
 					callFirstApi(mRegId);
@@ -75,8 +73,7 @@ public class FragmentInformationTest extends ActivityInstrumentationTestCase2 {
 	public void testWebviewNotNull() {
 		try {
 			Thread.sleep(1000);
-			activity.replaceFragment(fragmentInformation,
-					R.id.activity_main_content, false);
+			activity.replaceFragment(fragmentInformation, R.id.activity_main_content, false);
 			Thread.sleep(1000);
 
 			WebView mWebview = (WebView) fragmentInformation.getWebView();

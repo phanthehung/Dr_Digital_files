@@ -26,8 +26,7 @@ public class AdapterNotification extends ListViewItem {
 		_title.setText(notification.title);
 		_message.setText(notification.message);
 
-		SimpleDateFormat sdf = new SimpleDateFormat("MMM dd HH:mm:ss yyyy",
-				Locale.getDefault());
+		SimpleDateFormat sdf = new SimpleDateFormat("MMM dd HH:mm:ss yyyy", Locale.getDefault());
 		_time.setText(sdf.format(new Date(notification.time)));
 	}
 

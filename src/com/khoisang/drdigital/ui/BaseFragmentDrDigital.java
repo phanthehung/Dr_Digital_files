@@ -9,8 +9,7 @@ import com.khoisang.drdigital.R;
 import com.khoisang.khoisanglibary.ui.ActionEvent;
 import com.khoisang.khoisanglibary.ui.fragment.BaseFragment;
 
-public abstract class BaseFragmentDrDigital extends BaseFragment implements
-		OnClickListener {
+public abstract class BaseFragmentDrDigital extends BaseFragment implements OnClickListener {
 	private ImageView mImageViewBell;
 
 	@Override

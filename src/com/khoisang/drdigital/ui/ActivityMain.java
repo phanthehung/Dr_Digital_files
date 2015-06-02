@@ -38,8 +38,12 @@ import com.khoisang.khoisanglibary.ui.ActionEvent;
 import com.khoisang.khoisanglibary.ui.activity.BaseActivity;
 import com.khoisang.khoisanglibary.util.NetwordUtil;
 
+<<<<<<< Updated upstream
 public class ActivityMain extends BaseActivity implements OnClickListener,
 HttpHandler, DebugLogListerner {
+=======
+public class ActivityMain extends BaseActivity implements OnClickListener, HttpHandler, DebugLogListerner {
+>>>>>>> Stashed changes
 
 	public static final String PROJECT_NUMBER_ID = "660565524128";
 	private static final String PROPERTY_REG_ID = "registration_id";
@@ -100,8 +104,7 @@ HttpHandler, DebugLogListerner {
 		return mFragmentNotification;
 	}
 
-	public void setmFragmentNotification(
-			FragmentNotification mFragmentNotification) {
+	public void setmFragmentNotification(FragmentNotification mFragmentNotification) {
 		this.mFragmentNotification = mFragmentNotification;
 	}
 
@@ -131,8 +134,7 @@ HttpHandler, DebugLogListerner {
 			replaceFragment(mFragmentLocation, R.id.activity_main_content, true);
 			break;
 		case 4:
-			replaceFragment(mFragmentInformation, R.id.activity_main_content,
-					true);
+			replaceFragment(mFragmentInformation, R.id.activity_main_content, true);
 			break;
 		case 5:
 			Intent intent = new Intent(this, ActivityGoogleMap.class);
@@ -149,8 +151,7 @@ HttpHandler, DebugLogListerner {
 				handleError(ex);
 			}
 			mFragmentNotification.setListNotification(listNotifications);
-			replaceFragment(mFragmentNotification, R.id.activity_main_content,
-					true);
+			replaceFragment(mFragmentNotification, R.id.activity_main_content, true);
 
 			break;
 		case Event.SUPPORT_NON_BACK:
@@ -159,8 +160,7 @@ HttpHandler, DebugLogListerner {
 			break;
 		case Event.INFORMATION_NON_BACK:
 			clearFragmentBackStack();
-			replaceFragment(mFragmentInformation, R.id.activity_main_content,
-					false);
+			replaceFragment(mFragmentInformation, R.id.activity_main_content, false);
 			break;
 		case Event.ENQUIRY_NON_BACK:
 			clearFragmentBackStack();
@@ -168,8 +168,7 @@ HttpHandler, DebugLogListerner {
 			break;
 		case Event.LOCATION_NON_BACK:
 			clearFragmentBackStack();
-			replaceFragment(mFragmentLocation, R.id.activity_main_content,
-					false);
+			replaceFragment(mFragmentLocation, R.id.activity_main_content, false);
 			break;
 		case Event.NOTIFICATION_NON_BACK:
 			DrDigitalApplication.counter = 0;
@@ -192,8 +191,7 @@ HttpHandler, DebugLogListerner {
 	@Override
 	protected void beforeSetLayoutID(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-				WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 	}
 
 	@Override
@@ -209,8 +207,7 @@ HttpHandler, DebugLogListerner {
 		}
 
 		if (checkPlayServices() == true) {
-			mGoogleCloudMessage = GoogleCloudMessaging
-					.getInstance(getApplicationContext());
+			mGoogleCloudMessage = GoogleCloudMessaging.getInstance(getApplicationContext());
 			mRegId = getRegistrationId(getApplicationContext());
 			if (mRegId.equalsIgnoreCase("") == true) {
 				registerInBackground();
@@ -240,12 +237,10 @@ HttpHandler, DebugLogListerner {
 	}
 
 	private boolean checkPlayServices() {
-		int resultCode = GooglePlayServicesUtil
-				.isGooglePlayServicesAvailable(this);
+		int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
 		if (resultCode != ConnectionResult.SUCCESS) {
 			if (GooglePlayServicesUtil.isUserRecoverableError(resultCode)) {
-				GooglePlayServicesUtil.getErrorDialog(resultCode, this,
-						PLAY_SERVICES_RESOLUTION_REQUEST).show();
+				GooglePlayServicesUtil.getErrorDialog(resultCode, this, PLAY_SERVICES_RESOLUTION_REQUEST).show();
 			}
 			return false;
 		}
@@ -266,8 +261,7 @@ HttpHandler, DebugLogListerner {
 	}
 
 	private SharedPreferences getPreferences(Context context) {
-		return getSharedPreferences(this.getClass().getSimpleName(),
-				Context.MODE_PRIVATE);
+		return getSharedPreferences(this.getClass().getSimpleName(), Context.MODE_PRIVATE);
 	}
 
 	private void registerInBackground() {
@@ -278,8 +272,7 @@ HttpHandler, DebugLogListerner {
 				try {
 					
 					if (mGoogleCloudMessage == null) {
-						mGoogleCloudMessage = GoogleCloudMessaging
-								.getInstance(ActivityMain.this);
+						mGoogleCloudMessage = GoogleCloudMessaging.getInstance(ActivityMain.this);
 					}
 					mRegId = mGoogleCloudMessage.register(PROJECT_NUMBER_ID);
 					storeRegistrationId(ActivityMain.this, mRegId);
@@ -320,6 +313,7 @@ HttpHandler, DebugLogListerner {
 			@Override
 			public void run() {
 				DebugLog.e(ActivityMain.this.getTag(), ex);
+<<<<<<< Updated upstream
 				String message = ExceptionToMessage.getMessage(
 						ActivityMain.this.getResources(), ex);
 				new AlertDialog.Builder(ActivityMain.this)
@@ -329,6 +323,11 @@ HttpHandler, DebugLogListerner {
 						new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog,
 							int which) {
+=======
+				String message = ExceptionToMessage.getMessage(ActivityMain.this.getResources(), ex);
+				new AlertDialog.Builder(ActivityMain.this).setTitle("Error").setMessage(message).setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+>>>>>>> Stashed changes
 						dialog.dismiss();
 						ActivityMain.this.finish();
 					}
@@ -343,8 +342,7 @@ HttpHandler, DebugLogListerner {
 	}
 
 	@Override
-	public void handleException(int ID, int Name, final Exception ex,
-			Object holder) {
+	public void handleException(int ID, int Name, final Exception ex, Object holder) {
 		runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
@@ -360,13 +358,11 @@ HttpHandler, DebugLogListerner {
 	}
 
 	@Override
-	public void handleResult(int ID, int Name, HttpResult httpResult,
-			String bodyString, Object holder) {
+	public void handleResult(int ID, int Name, HttpResult httpResult, String bodyString, Object holder) {
 		DebugLog.i(getTag(), bodyString);
 		try {
 			hideIndicator();
-			OutputGetData outputGetData = new Gson().fromJson(bodyString,
-					OutputGetData.class);
+			OutputGetData outputGetData = new Gson().fromJson(bodyString, OutputGetData.class);
 			mFragmentSupport = new FragmentSupport(outputGetData.support);
 			mFragmentEnquiry = new FragmentEnquiry(outputGetData.enquiry);
 			mFragmentLocation = new FragmentLocation(outputGetData.location);

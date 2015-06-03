@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 
+import com.khoisang.drdigital.constant.Event;
 import com.khoisang.drdigital.data.Location;
 import com.khoisang.drdigital.ui.ActivityMain;
 import com.khoisang.drdigital.ui.FragmentLocation;
@@ -42,7 +43,7 @@ public class AdapterLocation extends ListViewItem implements OnClickListener {
 	public void onClick(View v) {
 		if (mFragmentLocation != null && mFragmentLocation.get() != null) {
 			ActivityMain activityMain = (ActivityMain) mFragmentLocation.get().getActivity();
-			activityMain.handleEvent(new ActionEvent(5, mLocation));
+			activityMain.handleEvent(new ActionEvent(Event.SHOW_MAP, mLocation));
 		}
 	}
 

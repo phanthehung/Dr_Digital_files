@@ -32,7 +32,7 @@ public class FragmentInformationTest extends ActivityInstrumentationTestCase2 {
 		mGoogleCloudMessage = GoogleCloudMessaging.getInstance(activity.getApplicationContext());
 		registerInBackground();
 		Thread.sleep(3000);
-		fragmentInformation = activity.getmFragmentInformation();
+		fragmentInformation = activity.getFragmentInformation();
 	}
 
 	public void testPrecondition() {

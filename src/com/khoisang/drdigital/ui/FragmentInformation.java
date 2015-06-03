@@ -3,29 +3,24 @@ package com.khoisang.drdigital.ui;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.khoisang.drdigital.R;
-import com.khoisang.drdigital.constant.Event;
-import com.khoisang.khoisanglibary.ui.ActionEvent;
+import com.khoisang.drdigital.ui.BaseDrDigital.ContentType;
+import com.khoisang.khoisanglibary.ui.fragment.BaseFragment;
 
-public class FragmentInformation extends BaseFragmentDrDigital {
+public class FragmentInformation extends BaseFragment {
 	// UI
 	WebView _webview;
-	private ImageView mBottomOption1;
-	private ImageView mBottomOption2;
-	private ImageView mBottomOption3;
-	private ImageView mBottomOption4;
-	private TextView txtCounter;
 	//
 	private String mContent;
+	private BaseDrDigital mBaseDrDigital;
 
 	public FragmentInformation() {
 	}
 
-	public FragmentInformation(String content) {
+	public FragmentInformation(String content, BaseDrDigital baseDrDigital) {
 		mContent = content;
+		mBaseDrDigital = baseDrDigital;
 	}
 
 	public WebView getWebView() {
@@ -47,57 +42,45 @@ public class FragmentInformation extends BaseFragmentDrDigital {
 
 	@Override
 	protected void afterSetLayoutID(Bundle savedInstanceState) {
-		super.afterSetLayoutID(savedInstanceState);
+		mBaseDrDigital.initView(getView());
+		mBaseDrDigital.checkNotification(ContentType.Information);
 
-		mBottomOption1 = (ImageView) findViewById(R.id.layout_bottom_1);
-		mBottomOption1.setImageDrawable(getResources().getDrawable(R.drawable.support_icon));
-		mBottomOption1.setOnClickListener(new View.OnClickListener() {
+		mBaseDrDigital.getOption1().setImageDrawable(getResources().getDrawable(R.drawable.support_icon));
+		mBaseDrDigital.getOption2().setImageDrawable(getResources().getDrawable(R.drawable.enquiry_icon));
+		mBaseDrDigital.getOption3().setImageDrawable(getResources().getDrawable(R.drawable.location_icon));
+		mBaseDrDigital.getOption4().setImageDrawable(getResources().getDrawable(R.drawable.notification_icon));
 
-			@Override
-			public void onClick(View v) {
-				FragmentInformation.this.raiseEvent(new ActionEvent(Event.SUPPORT_NON_BACK, null));
-
-			}
-		});
-
-		mBottomOption2 = (ImageView) findViewById(R.id.layout_bottom_2);
-		mBottomOption2.setImageDrawable(getResources().getDrawable(R.drawable.enquiry_icon));
-		mBottomOption2.setOnClickListener(new View.OnClickListener() {
+		mBaseDrDigital.getOption1().setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				FragmentInformation.this.raiseEvent(new ActionEvent(Event.ENQUIRY_NON_BACK, null));
-
+				mBaseDrDigital.onClickSupport();
 			}
 		});
-
-		mBottomOption3 = (ImageView) findViewById(R.id.layout_bottom_3);
-		mBottomOption3.setImageDrawable(getResources().getDrawable(R.drawable.location_icon));
-		mBottomOption3.setOnClickListener(new View.OnClickListener() {
+		mBaseDrDigital.getOption2().setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				FragmentInformation.this.raiseEvent(new ActionEvent(Event.LOCATION_NON_BACK, null));
+				mBaseDrDigital.onClickEnquiry();
 
 			}
 		});
+		mBaseDrDigital.getOption3().setOnClickListener(new View.OnClickListener() {
 
-		mBottomOption4 = (ImageView) findViewById(R.id.layout_bottom_4);
-		mBottomOption4.setImageDrawable(getResources().getDrawable(R.drawable.notification_icon));
-		mBottomOption4.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				FragmentInformation.this.raiseEvent(new ActionEvent(Event.NOTIFICATION_NON_BACK, null));
+				mBaseDrDigital.onClickLocation();
+
 			}
 		});
+		mBaseDrDigital.getOption4().setOnClickListener(new View.OnClickListener() {
 
-		txtCounter = (TextView) findViewById(R.id.txtCounter);
-		if (DrDigitalApplication.counter == 0) {
-			txtCounter.setVisibility(View.GONE);
-		} else {
-			txtCounter.setVisibility(View.VISIBLE);
-			txtCounter.setText(String.valueOf(DrDigitalApplication.counter));
-		}
+			@Override
+			public void onClick(View v) {
+				mBaseDrDigital.onClickNotification();
+
+			}
+		});
 
 		if (mContent != null) {
 			StringBuilder headString = new StringBuilder();
@@ -113,12 +96,8 @@ public class FragmentInformation extends BaseFragmentDrDigital {
 
 	@Override
 	protected void reCreateView() {
-
-	}
-
-	@Override
-	public void onClick(View v) {
-		super.onClick(v);
+		mBaseDrDigital.initView(getView());
+		mBaseDrDigital.checkNotification(ContentType.Information);
 	}
 
 }

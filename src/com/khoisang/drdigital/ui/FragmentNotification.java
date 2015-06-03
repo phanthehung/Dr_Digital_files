@@ -10,9 +10,8 @@ import android.widget.ImageView;
 
 import com.khoisang.drdigital.R;
 import com.khoisang.drdigital.adapter.AdapterNotification;
-import com.khoisang.drdigital.constant.Event;
 import com.khoisang.drdigital.data.Notification;
-import com.khoisang.khoisanglibary.ui.ActionEvent;
+import com.khoisang.drdigital.ui.BaseDrDigital.ContentType;
 import com.khoisang.khoisanglibary.ui.ListViewItem;
 import com.khoisang.khoisanglibary.ui.fragment.ListViewFragment;
 
@@ -23,7 +22,8 @@ public class FragmentNotification extends ListViewFragment {
 	private ImageView mBottomOption3;
 	private ImageView mBottomOption4;
 
-	private ImageView mImageViewBell;
+	private BaseDrDigital mBaseDrDigital;
+
 	private ArrayList<Object> listNotification;
 
 	private ArrayList<Object> getListNotification() {
@@ -32,7 +32,8 @@ public class FragmentNotification extends ListViewFragment {
 		return listNotification;
 	}
 
-	public FragmentNotification() {
+	public FragmentNotification(BaseDrDigital baseDrDigital) {
+		mBaseDrDigital = baseDrDigital;
 	}
 
 	public void setListNotification(List<Notification> listNotification) {
@@ -45,47 +46,45 @@ public class FragmentNotification extends ListViewFragment {
 	protected void afterSetLayoutID(Bundle savedInstanceState) {
 		super.afterSetLayoutID(savedInstanceState);
 
-		mBottomOption1 = (ImageView) findViewById(R.id.layout_bottom_1);
-		mBottomOption1.setImageDrawable(getResources().getDrawable(R.drawable.support_icon));
-		mBottomOption1.setOnClickListener(new View.OnClickListener() {
+		mBaseDrDigital.initView(getView());
+		mBaseDrDigital.checkNotification(ContentType.Notification);
+
+		mBaseDrDigital.getOption1().setImageDrawable(getResources().getDrawable(R.drawable.support_icon));
+		mBaseDrDigital.getOption2().setImageDrawable(getResources().getDrawable(R.drawable.information_icon));
+		mBaseDrDigital.getOption3().setImageDrawable(getResources().getDrawable(R.drawable.enquiry_icon));
+		mBaseDrDigital.getOption4().setImageDrawable(getResources().getDrawable(R.drawable.location_icon));
+
+		mBaseDrDigital.getOption1().setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				FragmentNotification.this.raiseEvent(new ActionEvent(Event.SUPPORT_NON_BACK, null));
+				mBaseDrDigital.onClickSupport();
 			}
 		});
-
-		mBottomOption2 = (ImageView) findViewById(R.id.layout_bottom_2);
-		mBottomOption2.setImageDrawable(getResources().getDrawable(R.drawable.information_icon));
-		mBottomOption2.setOnClickListener(new View.OnClickListener() {
+		mBaseDrDigital.getOption2().setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				FragmentNotification.this.raiseEvent(new ActionEvent(Event.INFORMATION_NON_BACK, null));
+				mBaseDrDigital.onClickLocation();
+
 			}
 		});
-
-		mBottomOption3 = (ImageView) findViewById(R.id.layout_bottom_3);
-		mBottomOption3.setImageDrawable(getResources().getDrawable(R.drawable.enquiry_icon));
-		mBottomOption3.setOnClickListener(new View.OnClickListener() {
+		mBaseDrDigital.getOption3().setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				FragmentNotification.this.raiseEvent(new ActionEvent(Event.ENQUIRY_NON_BACK, null));
+				mBaseDrDigital.onClickLocation();
+
 			}
 		});
+		mBaseDrDigital.getOption4().setOnClickListener(new View.OnClickListener() {
 
-		mBottomOption4 = (ImageView) findViewById(R.id.layout_bottom_4);
-		mBottomOption4.setImageDrawable(getResources().getDrawable(R.drawable.location_icon));
-		mBottomOption4.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				FragmentNotification.this.raiseEvent(new ActionEvent(Event.LOCATION_NON_BACK, null));
+				mBaseDrDigital.onClickLocation();
+
 			}
 		});
-
-		mImageViewBell = (ImageView) findViewById(R.id.layout_header_bell);
-		mImageViewBell.setVisibility(View.INVISIBLE);
 
 		if (getListNotification().size() == 0)
 			showToast("Not found", false);
@@ -122,6 +121,8 @@ public class FragmentNotification extends ListViewFragment {
 
 	@Override
 	protected void reCreateView() {
+		mBaseDrDigital.initView(getView());
+		mBaseDrDigital.checkNotification(ContentType.Notification);
 		if (getListNotification().size() == 0)
 			showToast("Not found", false);
 	}

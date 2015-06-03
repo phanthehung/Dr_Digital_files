@@ -15,7 +15,6 @@ public final class R {
 		public static final int abc_slide_out_bottom = 0x7f040004;
 		public static final int abc_slide_out_top = 0x7f040005;
 	}
-
 	public static final class attr {
 		public static final int actionBarDivider = 0x7f010015;
 		public static final int actionBarItemBackground = 0x7f010016;
@@ -224,7 +223,6 @@ public final class R {
 		public static final int windowFixedWidthMinor = 0x7f010008;
 		public static final int zOrderOnTop = 0x7f0100bd;
 	}
-
 	public static final class bool {
 		public static final int abc_action_bar_embed_tabs = 0x7f060000;
 		public static final int abc_action_bar_embed_tabs_pre_jb = 0x7f060001;
@@ -233,7 +231,6 @@ public final class R {
 		public static final int abc_config_allowActionMenuItemTextWithIcon = 0x7f060004;
 		public static final int abc_config_showMenuShortcutsWhenKeyboardPresent = 0x7f060003;
 	}
-
 	public static final class color {
 		public static final int abc_background_cache_hint_selector_material_dark = 0x7f0700d8;
 		public static final int abc_background_cache_hint_selector_material_light = 0x7f0700d9;
@@ -321,7 +318,6 @@ public final class R {
 		public static final int wallet_primary_text_holo_light = 0x7f0700e3;
 		public static final int wallet_secondary_text_holo_dark = 0x7f0700e4;
 	}
-
 	public static final class dimen {
 		public static final int abc_action_bar_default_height_material = 0x7f080014;
 		public static final int abc_action_bar_default_padding_material = 0x7f080015;
@@ -367,7 +363,6 @@ public final class R {
 		public static final int disabled_alpha_material_dark = 0x7f080001;
 		public static final int disabled_alpha_material_light = 0x7f080000;
 	}
-
 	public static final class drawable {
 		public static final int abc_ab_share_pack_holo_dark = 0x7f020000;
 		public static final int abc_ab_share_pack_holo_light = 0x7f020001;
@@ -420,42 +415,41 @@ public final class R {
 		public static final int abc_textfield_search_activated_mtrl_alpha = 0x7f020030;
 		public static final int abc_textfield_search_default_mtrl_alpha = 0x7f020031;
 		public static final int abc_textfield_search_material = 0x7f020032;
-		public static final int bubble_mask = 0x7f020035;
-		public static final int bubble_shadow = 0x7f020036;
-		public static final int common_full_open_on_phone = 0x7f020037;
-		public static final int common_ic_googleplayservices = 0x7f020038;
-		public static final int common_signin_btn_icon_dark = 0x7f020039;
-		public static final int common_signin_btn_icon_disabled_dark = 0x7f02003a;
-		public static final int common_signin_btn_icon_disabled_focus_dark = 0x7f02003b;
-		public static final int common_signin_btn_icon_disabled_focus_light = 0x7f02003c;
-		public static final int common_signin_btn_icon_disabled_light = 0x7f02003d;
-		public static final int common_signin_btn_icon_focus_dark = 0x7f02003e;
-		public static final int common_signin_btn_icon_focus_light = 0x7f02003f;
-		public static final int common_signin_btn_icon_light = 0x7f020040;
-		public static final int common_signin_btn_icon_normal_dark = 0x7f020041;
-		public static final int common_signin_btn_icon_normal_light = 0x7f020042;
-		public static final int common_signin_btn_icon_pressed_dark = 0x7f020043;
-		public static final int common_signin_btn_icon_pressed_light = 0x7f020044;
-		public static final int common_signin_btn_text_dark = 0x7f020045;
-		public static final int common_signin_btn_text_disabled_dark = 0x7f020046;
-		public static final int common_signin_btn_text_disabled_focus_dark = 0x7f020047;
-		public static final int common_signin_btn_text_disabled_focus_light = 0x7f020048;
-		public static final int common_signin_btn_text_disabled_light = 0x7f020049;
-		public static final int common_signin_btn_text_focus_dark = 0x7f02004a;
-		public static final int common_signin_btn_text_focus_light = 0x7f02004b;
-		public static final int common_signin_btn_text_light = 0x7f02004c;
-		public static final int common_signin_btn_text_normal_dark = 0x7f02004d;
-		public static final int common_signin_btn_text_normal_light = 0x7f02004e;
-		public static final int common_signin_btn_text_pressed_dark = 0x7f02004f;
-		public static final int common_signin_btn_text_pressed_light = 0x7f020050;
-		public static final int ic_plusone_medium_off_client = 0x7f020055;
-		public static final int ic_plusone_small_off_client = 0x7f020056;
-		public static final int ic_plusone_standard_off_client = 0x7f020057;
-		public static final int ic_plusone_tall_off_client = 0x7f020058;
-		public static final int powered_by_google_dark = 0x7f02005d;
-		public static final int powered_by_google_light = 0x7f02005e;
+		public static final int bubble_mask = 0x7f020036;
+		public static final int bubble_shadow = 0x7f020037;
+		public static final int common_full_open_on_phone = 0x7f020038;
+		public static final int common_ic_googleplayservices = 0x7f020039;
+		public static final int common_signin_btn_icon_dark = 0x7f02003a;
+		public static final int common_signin_btn_icon_disabled_dark = 0x7f02003b;
+		public static final int common_signin_btn_icon_disabled_focus_dark = 0x7f02003c;
+		public static final int common_signin_btn_icon_disabled_focus_light = 0x7f02003d;
+		public static final int common_signin_btn_icon_disabled_light = 0x7f02003e;
+		public static final int common_signin_btn_icon_focus_dark = 0x7f02003f;
+		public static final int common_signin_btn_icon_focus_light = 0x7f020040;
+		public static final int common_signin_btn_icon_light = 0x7f020041;
+		public static final int common_signin_btn_icon_normal_dark = 0x7f020042;
+		public static final int common_signin_btn_icon_normal_light = 0x7f020043;
+		public static final int common_signin_btn_icon_pressed_dark = 0x7f020044;
+		public static final int common_signin_btn_icon_pressed_light = 0x7f020045;
+		public static final int common_signin_btn_text_dark = 0x7f020046;
+		public static final int common_signin_btn_text_disabled_dark = 0x7f020047;
+		public static final int common_signin_btn_text_disabled_focus_dark = 0x7f020048;
+		public static final int common_signin_btn_text_disabled_focus_light = 0x7f020049;
+		public static final int common_signin_btn_text_disabled_light = 0x7f02004a;
+		public static final int common_signin_btn_text_focus_dark = 0x7f02004b;
+		public static final int common_signin_btn_text_focus_light = 0x7f02004c;
+		public static final int common_signin_btn_text_light = 0x7f02004d;
+		public static final int common_signin_btn_text_normal_dark = 0x7f02004e;
+		public static final int common_signin_btn_text_normal_light = 0x7f02004f;
+		public static final int common_signin_btn_text_pressed_dark = 0x7f020050;
+		public static final int common_signin_btn_text_pressed_light = 0x7f020051;
+		public static final int ic_plusone_medium_off_client = 0x7f020056;
+		public static final int ic_plusone_small_off_client = 0x7f020057;
+		public static final int ic_plusone_standard_off_client = 0x7f020058;
+		public static final int ic_plusone_tall_off_client = 0x7f020059;
+		public static final int powered_by_google_dark = 0x7f02005e;
+		public static final int powered_by_google_light = 0x7f02005f;
 	}
-
 	public static final class id {
 		public static final int action_bar = 0x7f0a0048;
 		public static final int action_bar_activity_content = 0x7f0a0003;
@@ -544,12 +538,10 @@ public final class R {
 		public static final int withText = 0x7f0a0019;
 		public static final int wrap_content = 0x7f0a000a;
 	}
-
 	public static final class integer {
 		public static final int abc_max_action_buttons = 0x7f090000;
 		public static final int google_play_services_version = 0x7f090001;
 	}
-
 	public static final class layout {
 		public static final int abc_action_bar_title_item = 0x7f030000;
 		public static final int abc_action_bar_up_container = 0x7f030001;
@@ -577,11 +569,9 @@ public final class R {
 		public static final int support_simple_spinner_dropdown_item = 0x7f030027;
 		public static final int text_bubble = 0x7f030028;
 	}
-
 	public static final class raw {
 		public static final int gtm_analytics = 0x7f050000;
 	}
-
 	public static final class string {
 		public static final int abc_action_bar_home_description = 0x7f0b0001;
 		public static final int abc_action_bar_home_description_format = 0x7f0b0004;
@@ -634,7 +624,6 @@ public final class R {
 		public static final int store_picture_title = 0x7f0b0016;
 		public static final int wallet_buy_button_place_holder = 0x7f0b0038;
 	}
-
 	public static final class style {
 		public static final int Base_TextAppearance_AppCompat = 0x7f0c0098;
 		public static final int Base_TextAppearance_AppCompat_Body1 = 0x7f0c00a3;
@@ -880,7 +869,6 @@ public final class R {
 		public static final int Widget_AppCompat_Toolbar = 0x7f0c0034;
 		public static final int Widget_AppCompat_Toolbar_Button_Navigation = 0x7f0c0035;
 	}
-
 	public static final class styleable {
 		public static final int[] ActionBar = { 0x7f010000, 0x7f010001, 0x7f01002c, 0x7f010055, 0x7f010056, 0x7f010057, 0x7f010058, 0x7f010059, 0x7f01005a, 0x7f01005b, 0x7f01005c, 0x7f01005d, 0x7f01005e, 0x7f01005f, 0x7f010060, 0x7f010061, 0x7f010062, 0x7f010063, 0x7f010064, 0x7f010065, 0x7f010066, 0x7f010067, 0x7f010068, 0x7f010069, 0x7f01006a, 0x7f01006b, 0x7f01006c };
 		public static final int[] ActionBarLayout = { 0x010100b3 };
@@ -914,7 +902,7 @@ public final class R {
 		public static final int ActionBar_titleTextStyle = 6;
 		public static final int[] ActionMenuItemView = { 0x0101013f };
 		public static final int ActionMenuItemView_android_minWidth = 0;
-		public static final int[] ActionMenuView = {};
+		public static final int[] ActionMenuView = { };
 		public static final int[] ActionMode = { 0x7f010001, 0x7f010058, 0x7f010059, 0x7f01005d, 0x7f01005f, 0x7f01006d };
 		public static final int ActionMode_background = 3;
 		public static final int ActionMode_backgroundSplit = 4;
@@ -1057,8 +1045,7 @@ public final class R {
 		public static final int SwitchCompat_switchTextAppearance = 5;
 		public static final int SwitchCompat_thumbTextPadding = 4;
 		public static final int SwitchCompat_track = 3;
-		public static final int[] Theme = { 0x01010057, 0x7f010003, 0x7f010004, 0x7f010005, 0x7f010006, 0x7f010007, 0x7f010008, 0x7f010009, 0x7f01000a, 0x7f01000b, 0x7f01000c, 0x7f01000d, 0x7f01000e, 0x7f01000f, 0x7f010010, 0x7f010011, 0x7f010012, 0x7f010013, 0x7f010014, 0x7f010015, 0x7f010016, 0x7f010017, 0x7f010018, 0x7f010019, 0x7f01001a, 0x7f01001b, 0x7f01001c, 0x7f01001d, 0x7f01001e, 0x7f01001f, 0x7f010020, 0x7f010021, 0x7f010022, 0x7f010023, 0x7f010024, 0x7f010025, 0x7f010026, 0x7f010027, 0x7f010028, 0x7f010029, 0x7f01002a, 0x7f01002b, 0x7f01002c, 0x7f01002d, 0x7f01002e, 0x7f01002f, 0x7f010030, 0x7f010031, 0x7f010032, 0x7f010033, 0x7f010034, 0x7f010035, 0x7f010036, 0x7f010037, 0x7f010038, 0x7f010039, 0x7f01003a, 0x7f01003b, 0x7f01003c, 0x7f01003d, 0x7f01003e, 0x7f01003f, 0x7f010040, 0x7f010041, 0x7f010042, 0x7f010043, 0x7f010044, 0x7f010045, 0x7f010046, 0x7f010047, 0x7f010048, 0x7f010049, 0x7f01004a, 0x7f01004b, 0x7f01004c, 0x7f01004d, 0x7f01004e, 0x7f01004f, 0x7f010050,
-				0x7f010051, 0x7f010052, 0x7f010053, 0x7f010054 };
+		public static final int[] Theme = { 0x01010057, 0x7f010003, 0x7f010004, 0x7f010005, 0x7f010006, 0x7f010007, 0x7f010008, 0x7f010009, 0x7f01000a, 0x7f01000b, 0x7f01000c, 0x7f01000d, 0x7f01000e, 0x7f01000f, 0x7f010010, 0x7f010011, 0x7f010012, 0x7f010013, 0x7f010014, 0x7f010015, 0x7f010016, 0x7f010017, 0x7f010018, 0x7f010019, 0x7f01001a, 0x7f01001b, 0x7f01001c, 0x7f01001d, 0x7f01001e, 0x7f01001f, 0x7f010020, 0x7f010021, 0x7f010022, 0x7f010023, 0x7f010024, 0x7f010025, 0x7f010026, 0x7f010027, 0x7f010028, 0x7f010029, 0x7f01002a, 0x7f01002b, 0x7f01002c, 0x7f01002d, 0x7f01002e, 0x7f01002f, 0x7f010030, 0x7f010031, 0x7f010032, 0x7f010033, 0x7f010034, 0x7f010035, 0x7f010036, 0x7f010037, 0x7f010038, 0x7f010039, 0x7f01003a, 0x7f01003b, 0x7f01003c, 0x7f01003d, 0x7f01003e, 0x7f01003f, 0x7f010040, 0x7f010041, 0x7f010042, 0x7f010043, 0x7f010044, 0x7f010045, 0x7f010046, 0x7f010047, 0x7f010048, 0x7f010049, 0x7f01004a, 0x7f01004b, 0x7f01004c, 0x7f01004d, 0x7f01004e, 0x7f01004f, 0x7f010050, 0x7f010051, 0x7f010052, 0x7f010053, 0x7f010054 };
 		public static final int Theme_actionBarDivider = 19;
 		public static final int Theme_actionBarItemBackground = 20;
 		public static final int Theme_actionBarPopupTheme = 13;

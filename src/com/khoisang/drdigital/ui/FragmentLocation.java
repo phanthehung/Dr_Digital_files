@@ -7,26 +7,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.khoisang.drdigital.R;
 import com.khoisang.drdigital.adapter.AdapterLocation;
-import com.khoisang.drdigital.constant.Event;
 import com.khoisang.drdigital.data.Location;
-import com.khoisang.khoisanglibary.ui.ActionEvent;
+import com.khoisang.drdigital.ui.BaseDrDigital.ContentType;
 import com.khoisang.khoisanglibary.ui.ListViewItem;
 import com.khoisang.khoisanglibary.ui.fragment.ListViewFragment;
 
 public class FragmentLocation extends ListViewFragment implements OnClickListener {
 	// UI
-	private ImageView mImageViewBell;
-	private ImageView mBottomOption1;
-	private ImageView mBottomOption2;
-	private ImageView mBottomOption3;
-	private ImageView mBottomOption4;
-	private TextView txtCounter;
 
+	private BaseDrDigital mBaseDrDigital;
 	private ArrayList<Object> mListLocation;
 
 	private ArrayList<Object> getListLocation() {
@@ -38,63 +30,54 @@ public class FragmentLocation extends ListViewFragment implements OnClickListene
 	public FragmentLocation() {
 	}
 
-	public FragmentLocation(List<Location> listLocation) {
+	public FragmentLocation(List<Location> listLocation, BaseDrDigital baseDrDigital) {
 		getListLocation().addAll(listLocation);
+		mBaseDrDigital = baseDrDigital;
 	}
 
 	@Override
 	protected void afterSetLayoutID(Bundle savedInstanceState) {
 		super.afterSetLayoutID(savedInstanceState);
 
-		mBottomOption1 = (ImageView) findViewById(R.id.layout_bottom_1);
-		mBottomOption1.setImageDrawable(getResources().getDrawable(R.drawable.support_icon));
-		mBottomOption1.setOnClickListener(new View.OnClickListener() {
+		mBaseDrDigital.initView(getView());
+		mBaseDrDigital.checkNotification(ContentType.Location);
+
+		mBaseDrDigital.getOption1().setImageDrawable(getResources().getDrawable(R.drawable.support_icon));
+		mBaseDrDigital.getOption2().setImageDrawable(getResources().getDrawable(R.drawable.information_icon));
+		mBaseDrDigital.getOption3().setImageDrawable(getResources().getDrawable(R.drawable.enquiry_icon));
+		mBaseDrDigital.getOption4().setImageDrawable(getResources().getDrawable(R.drawable.notification_icon));
+
+		mBaseDrDigital.getOption1().setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				FragmentLocation.this.raiseEvent(new ActionEvent(Event.SUPPORT_NON_BACK, null));
+				mBaseDrDigital.onClickSupport();
 			}
 		});
-
-		mBottomOption2 = (ImageView) findViewById(R.id.layout_bottom_2);
-		mBottomOption2.setImageDrawable(getResources().getDrawable(R.drawable.information_icon));
-		mBottomOption2.setOnClickListener(new View.OnClickListener() {
+		mBaseDrDigital.getOption2().setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				FragmentLocation.this.raiseEvent(new ActionEvent(Event.INFORMATION_NON_BACK, null));
+				mBaseDrDigital.onClickInformation();
+
 			}
 		});
-
-		mBottomOption3 = (ImageView) findViewById(R.id.layout_bottom_3);
-		mBottomOption3.setImageDrawable(getResources().getDrawable(R.drawable.enquiry_icon));
-		mBottomOption3.setOnClickListener(new View.OnClickListener() {
+		mBaseDrDigital.getOption3().setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				FragmentLocation.this.raiseEvent(new ActionEvent(Event.ENQUIRY_NON_BACK, null));
+				mBaseDrDigital.onClickEnquiry();
+
 			}
 		});
+		mBaseDrDigital.getOption4().setOnClickListener(new View.OnClickListener() {
 
-		mBottomOption4 = (ImageView) findViewById(R.id.layout_bottom_4);
-		mBottomOption4.setImageDrawable(getResources().getDrawable(R.drawable.notification_icon));
-		mBottomOption4.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				FragmentLocation.this.raiseEvent(new ActionEvent(Event.NOTIFICATION_NON_BACK, null));
+				mBaseDrDigital.onClickNotification();
+
 			}
 		});
-
-		txtCounter = (TextView) findViewById(R.id.txtCounter);
-		if (DrDigitalApplication.counter == 0) {
-			txtCounter.setVisibility(View.INVISIBLE);
-		} else {
-			txtCounter.setVisibility(View.GONE);
-			txtCounter.setText(String.valueOf(DrDigitalApplication.counter));
-		}
-
-		mImageViewBell = (ImageView) findViewById(R.id.layout_header_bell);
-		mImageViewBell.setOnClickListener(this);
 
 		if (getListLocation().size() == 0)
 			showToast("Not found", false);
@@ -107,6 +90,8 @@ public class FragmentLocation extends ListViewFragment implements OnClickListene
 
 	@Override
 	protected void reCreateView() {
+		mBaseDrDigital.initView(getView());
+		mBaseDrDigital.checkNotification(ContentType.Location);
 		if (getListLocation().size() == 0)
 			showToast("Not found", false);
 	}
@@ -138,9 +123,6 @@ public class FragmentLocation extends ListViewFragment implements OnClickListene
 
 	@Override
 	public void onClick(View v) {
-		if (v == mImageViewBell) {
-			raiseEvent(new ActionEvent(6, null));
-		}
 	}
 
 }

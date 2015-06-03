@@ -17,43 +17,55 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:weightSum="130" >
+            android:weightSum="100" >
 
             <ImageView
                 android:id="@+id/layout_bottom_1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="30"
-                android:padding="10dp" />
+                android:layout_weight="25"
+                android:padding="10dp"
+                android:src="@drawable/information_icon" />
 
             <ImageView
                 android:id="@+id/layout_bottom_2"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="30"
-                android:padding="10dp" />
+                android:layout_weight="25"
+                android:padding="10dp"
+                android:src="@drawable/enquiry_icon" />
 
             <ImageView
                 android:id="@+id/layout_bottom_3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="30"
-                android:padding="10dp" />
-             <ImageView
-                android:id="@+id/layout_bottom_4"
+                android:layout_weight="25"
+                android:padding="10dp"
+                android:src="@drawable/location_icon" />
+
+            <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="30"
-                android:padding="10dp" />
+                android:layout_weight="25" >
 
-             <TextView
-                 android:id="@+id/txtCounter"
-                 android:layout_width="0dp"
-                 android:layout_height="match_parent"
-                 android:layout_weight="10"
-                 android:textColor="@color/White"
-                 android:textAppearance="?android:attr/textAppearanceSmall" />
+                <ImageView
+                    android:id="@+id/layout_bottom_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp"
+                    android:src="@drawable/notification_icon" />
 
+                <TextView
+                    android:id="@+id/layout_bottom_counter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:background="@drawable/bg_counter"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/red_by_customer"
+                    android:textColorHint="@color/red_by_customer" />
+            </RelativeLayout>
         </LinearLayout>
     </RelativeLayout>
 

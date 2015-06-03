@@ -15,6 +15,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -27,6 +29,7 @@ import com.khoisang.drdigital.api.structure.OutputGetData;
 import com.khoisang.drdigital.constant.Event;
 import com.khoisang.drdigital.data.Location;
 import com.khoisang.drdigital.data.Notification;
+import com.khoisang.drdigital.ui.BaseDrDigital.ContentType;
 import com.khoisang.drdigital.util.History;
 import com.khoisang.khoisanglibary.dev.DebugLog;
 import com.khoisang.khoisanglibary.dev.DebugLog.DebugLogListerner;
@@ -37,7 +40,7 @@ import com.khoisang.khoisanglibary.ui.ActionEvent;
 import com.khoisang.khoisanglibary.ui.activity.BaseActivity;
 import com.khoisang.khoisanglibary.util.NetwordUtil;
 
-public class ActivityMain extends BaseActivity implements OnClickListener, HttpHandler, DebugLogListerner {
+public class ActivityMain extends BaseActivity implements OnClickListener, HttpHandler, DebugLogListerner, BaseDrDigital {
 
 	public static final String PROJECT_NUMBER_ID = "660565524128";
 	private static final String PROPERTY_REG_ID = "registration_id";
@@ -50,56 +53,42 @@ public class ActivityMain extends BaseActivity implements OnClickListener, HttpH
 	private FragmentInformation mFragmentInformation;
 	private FragmentNotification mFragmentNotification;
 
+	public ImageView mBottomOption1;
+	public ImageView mBottomOption2;
+	public ImageView mBottomOption3;
+	public ImageView mBottomOption4;
+	public TextView txtCounter;
+	// Notification
 	private int mNotificationCounter = 0;
 	private GoogleCloudMessaging mGoogleCloudMessage;
 	private String mRegId;
 
-	public FragmentHome getmFragmentHome() {
+	public FragmentHome getFragmentHome() {
+		if (mFragmentHome == null)
+			mFragmentHome = new FragmentHome();
 		return mFragmentHome;
 	}
 
-	public void setmFragmentHome(FragmentHome mFragmentHome) {
-		this.mFragmentHome = mFragmentHome;
-	}
-
-	public FragmentSupport getmFragmentSupport() {
+	public FragmentSupport getFragmentSupport() {
 		return mFragmentSupport;
 	}
 
-	public void setmFragmentSupport(FragmentSupport mFragmentSupport) {
-		this.mFragmentSupport = mFragmentSupport;
-	}
-
-	public FragmentEnquiry getmFragmentEnquiry() {
+	public FragmentEnquiry getFragmentEnquiry() {
 		return mFragmentEnquiry;
 	}
 
-	public void setmFragmentEnquiry(FragmentEnquiry mFragmentEnquiry) {
-		this.mFragmentEnquiry = mFragmentEnquiry;
-	}
-
-	public FragmentLocation getmFragmentLocation() {
+	public FragmentLocation getFragmentLocation() {
 		return mFragmentLocation;
 	}
 
-	public void setmFragmentLocation(FragmentLocation mFragmentLocation) {
-		this.mFragmentLocation = mFragmentLocation;
-	}
-
-	public FragmentInformation getmFragmentInformation() {
+	public FragmentInformation getFragmentInformation() {
 		return mFragmentInformation;
 	}
 
-	public void setmFragmentInformation(FragmentInformation mFragmentInformation) {
-		this.mFragmentInformation = mFragmentInformation;
-	}
-
-	public FragmentNotification getmFragmentNotification() {
+	public FragmentNotification getFragmentNotification() {
+		if (mFragmentNotification == null)
+			mFragmentNotification = new FragmentNotification(this);
 		return mFragmentNotification;
-	}
-
-	public void setmFragmentNotification(FragmentNotification mFragmentNotification) {
-		this.mFragmentNotification = mFragmentNotification;
 	}
 
 	@Override
@@ -118,63 +107,42 @@ public class ActivityMain extends BaseActivity implements OnClickListener, HttpH
 	@Override
 	public void handleEvent(ActionEvent actionEvent) {
 		switch (actionEvent.eventID) {
-		case 1:
-			replaceFragment(mFragmentSupport, R.id.activity_main_content, true);
-			break;
-		case 2:
-			replaceFragment(mFragmentEnquiry, R.id.activity_main_content, true);
-			break;
-		case 3:
-			replaceFragment(mFragmentLocation, R.id.activity_main_content, true);
-			break;
-		case 4:
-			replaceFragment(mFragmentInformation, R.id.activity_main_content, true);
-			break;
-		case 5:
-			Intent intent = new Intent(this, ActivityGoogleMap.class);
-			Location location = (Location) actionEvent.parameters;
-			ActivityGoogleMap.Location = location;
-			startActivity(intent);
-			break;
-		case 6:
-			DrDigitalApplication.counter = 0;
-			List<Notification> listNotifications = null;
-			try {
-				listNotifications = History.get(getApplication());
-			} catch (Exception ex) {
-				handleError(ex);
+		case Event.SHOW_MAP:
+			if (actionEvent.parameters != null) {
+				Intent intent = new Intent(this, ActivityGoogleMap.class);
+				Location location = (Location) actionEvent.parameters;
+				ActivityGoogleMap.Location = location;
+				startActivity(intent);
 			}
-			mFragmentNotification.setListNotification(listNotifications);
-			replaceFragment(mFragmentNotification, R.id.activity_main_content, true);
-
 			break;
 		case Event.SUPPORT_NON_BACK:
 			clearFragmentBackStack();
-			replaceFragment(mFragmentSupport, R.id.activity_main_content, false);
+			replaceFragment(getFragmentSupport(), R.id.activity_main_content, false);
 			break;
 		case Event.INFORMATION_NON_BACK:
 			clearFragmentBackStack();
-			replaceFragment(mFragmentInformation, R.id.activity_main_content, false);
+			replaceFragment(getFragmentInformation(), R.id.activity_main_content, false);
 			break;
 		case Event.ENQUIRY_NON_BACK:
 			clearFragmentBackStack();
-			replaceFragment(mFragmentEnquiry, R.id.activity_main_content, false);
+			replaceFragment(getFragmentEnquiry(), R.id.activity_main_content, false);
 			break;
 		case Event.LOCATION_NON_BACK:
 			clearFragmentBackStack();
-			replaceFragment(mFragmentLocation, R.id.activity_main_content, false);
+			replaceFragment(getFragmentLocation(), R.id.activity_main_content, false);
 			break;
 		case Event.NOTIFICATION_NON_BACK:
-			DrDigitalApplication.counter = 0;
 			List<Notification> listNotifications_non_back = null;
 			try {
 				listNotifications_non_back = History.get(getApplication());
 			} catch (Exception ex) {
 				handleError(ex);
 			}
-			mFragmentNotification.setListNotification(listNotifications_non_back);
+			getFragmentNotification().setListNotification(listNotifications_non_back);
 			replaceFragment(mFragmentNotification, R.id.activity_main_content, true);
-
+			//
+			ApplicationDrDigital applicationDrDigital = (ApplicationDrDigital) getApplicationContext();
+			applicationDrDigital.setCounter(0);
 			break;
 		default:
 			break;
@@ -189,10 +157,9 @@ public class ActivityMain extends BaseActivity implements OnClickListener, HttpH
 
 	@Override
 	protected void afterSetLayoutID(Bundle savedInstanceState) {
-		DebugLog.setListerner(this);
-		mFragmentNotification = new FragmentNotification();
-		mFragmentHome = new FragmentHome();
-		addFragment(mFragmentHome, R.id.activity_main_content);
+		//DebugLog.setListerner(this);
+
+		addFragment(getFragmentHome(), R.id.activity_main_content);
 
 		if (NetwordUtil.isNetworkAvailable(this) == false) {
 			handleError(new UnknownHostException());
@@ -344,10 +311,10 @@ public class ActivityMain extends BaseActivity implements OnClickListener, HttpH
 		try {
 			hideIndicator();
 			OutputGetData outputGetData = new Gson().fromJson(bodyString, OutputGetData.class);
-			mFragmentSupport = new FragmentSupport(outputGetData.support);
-			mFragmentEnquiry = new FragmentEnquiry(outputGetData.enquiry);
-			mFragmentLocation = new FragmentLocation(outputGetData.location);
-			mFragmentInformation = new FragmentInformation(outputGetData.info);
+			mFragmentSupport = new FragmentSupport(outputGetData.support, this);
+			mFragmentEnquiry = new FragmentEnquiry(outputGetData.enquiry, this);
+			mFragmentInformation = new FragmentInformation(outputGetData.info, this);
+			mFragmentLocation = new FragmentLocation(outputGetData.location, this);
 			//
 			processIntent(getIntent());
 		} catch (Exception ex) {
@@ -357,5 +324,74 @@ public class ActivityMain extends BaseActivity implements OnClickListener, HttpH
 
 	@Override
 	public void debugLogHandlerError(Exception ex) {
+	}
+
+	@Override
+	public void initView(View view) {
+		mBottomOption1 = (ImageView) view.findViewById(R.id.layout_bottom_1);
+		mBottomOption2 = (ImageView) view.findViewById(R.id.layout_bottom_2);
+		mBottomOption3 = (ImageView) view.findViewById(R.id.layout_bottom_3);
+		mBottomOption4 = (ImageView) view.findViewById(R.id.layout_bottom_4);
+		txtCounter = (TextView) view.findViewById(R.id.layout_bottom_counter);
+	}
+
+	@Override
+	public void checkNotification(ContentType contentType) {
+		if (contentType == ContentType.Notification) {
+			txtCounter.setVisibility(View.INVISIBLE);
+		} else {
+			ApplicationDrDigital applicationDrDigital = (ApplicationDrDigital) getApplicationContext();
+			if (applicationDrDigital.getCounter() == 0) {
+				txtCounter.setVisibility(View.INVISIBLE);
+			} else {
+				txtCounter.setVisibility(View.VISIBLE);
+				txtCounter.setText(String.valueOf(applicationDrDigital.getCounter()));
+			}
+		}
+	}
+
+	@Override
+	public void onClickSupport() {
+		handleEvent(new ActionEvent(Event.SUPPORT_NON_BACK, null));
+	}
+
+	@Override
+	public void onClickInformation() {
+		handleEvent(new ActionEvent(Event.INFORMATION_NON_BACK, null));
+	}
+
+	@Override
+	public void onClickEnquiry() {
+		handleEvent(new ActionEvent(Event.ENQUIRY_NON_BACK, null));
+	}
+
+	@Override
+	public void onClickLocation() {
+		handleEvent(new ActionEvent(Event.LOCATION_NON_BACK, null));
+	}
+
+	@Override
+	public void onClickNotification() {
+		handleEvent(new ActionEvent(Event.NOTIFICATION_NON_BACK, null));
+	}
+
+	@Override
+	public ImageView getOption1() {
+		return mBottomOption1;
+	}
+
+	@Override
+	public ImageView getOption2() {
+		return mBottomOption2;
+	}
+
+	@Override
+	public ImageView getOption3() {
+		return mBottomOption3;
+	}
+
+	@Override
+	public ImageView getOption4() {
+		return mBottomOption4;
 	}
 }

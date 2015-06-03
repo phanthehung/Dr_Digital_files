@@ -37,7 +37,7 @@
     <uses-permission android:name="com.sec.android.provider.badge.permission.READ" />
 
     <application
-        android:name="com.khoisang.drdigital.ui.DrDigitalApplication"
+        android:name="com.khoisang.drdigital.ui.ApplicationDrDigital"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
@@ -76,7 +76,9 @@
             </intent-filter>
         </receiver>
 
-        <service android:name="com.khoisang.drdigital.ui.ServiceIntentGCM" />
+        <service
+            android:name="com.khoisang.drdigital.ui.ServiceIntentGCM"
+            android:enabled="true" />
 
         <uses-library android:name="android.test.runner" />
     </application>

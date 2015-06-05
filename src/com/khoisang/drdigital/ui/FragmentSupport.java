@@ -88,4 +88,9 @@ public class FragmentSupport extends BaseFragment {
 		mBaseDrDigital.checkNotification(ContentType.Support);
 	}
 
+	public void checkNotification() {
+
+		mBaseDrDigital.checkNotification(ContentType.Support);
+	}
+
 }

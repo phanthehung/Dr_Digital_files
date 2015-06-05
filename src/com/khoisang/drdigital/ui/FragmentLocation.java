@@ -96,6 +96,11 @@ public class FragmentLocation extends ListViewFragment implements OnClickListene
 			showToast("Not found", false);
 	}
 
+	public void checkNotification() {
+
+		mBaseDrDigital.checkNotification(ContentType.Location);
+	}
+
 	@Override
 	protected int getListViewID() {
 		return R.id.fragment_location_address_list;

@@ -127,4 +127,9 @@ public class FragmentNotification extends ListViewFragment {
 			showToast("Not found", false);
 	}
 
+	public void checkNotification() {
+
+		mBaseDrDigital.checkNotification(ContentType.Notification);
+	}
+
 }

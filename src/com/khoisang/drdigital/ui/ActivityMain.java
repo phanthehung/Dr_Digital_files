@@ -4,13 +4,17 @@ import java.net.UnknownHostException;
 import java.util.List;
 
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -21,6 +25,7 @@ import android.widget.TextView;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
+import com.google.android.gms.internal.ff;
 import com.google.gson.Gson;
 import com.khoisang.drdigital.R;
 import com.khoisang.drdigital.api.ApiManager;
@@ -29,7 +34,6 @@ import com.khoisang.drdigital.api.structure.OutputGetData;
 import com.khoisang.drdigital.constant.Event;
 import com.khoisang.drdigital.data.Location;
 import com.khoisang.drdigital.data.Notification;
-import com.khoisang.drdigital.ui.BaseDrDigital.ContentType;
 import com.khoisang.drdigital.util.History;
 import com.khoisang.khoisanglibary.dev.DebugLog;
 import com.khoisang.khoisanglibary.dev.DebugLog.DebugLogListerner;
@@ -43,6 +47,7 @@ import com.khoisang.khoisanglibary.util.NetwordUtil;
 public class ActivityMain extends BaseActivity implements OnClickListener, HttpHandler, DebugLogListerner, BaseDrDigital {
 
 	public static final String PROJECT_NUMBER_ID = "660565524128";
+	public static final String SERVICE_UPDATER = "ServiceIntentGCM";
 	private static final String PROPERTY_REG_ID = "registration_id";
 	private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
 
@@ -96,11 +101,11 @@ public class ActivityMain extends BaseActivity implements OnClickListener, HttpH
 		return R.layout.activity_main;
 	}
 
-	public int getmNotificationCounter() {
+	public int getNotificationCounter() {
 		return mNotificationCounter;
 	}
 
-	public void setmNotificationCounter(int mNotificationCounter) {
+	public void setNotificationCounter(int mNotificationCounter) {
 		this.mNotificationCounter = mNotificationCounter;
 	}
 
@@ -179,6 +184,50 @@ public class ActivityMain extends BaseActivity implements OnClickListener, HttpH
 				}
 			}
 		}
+	}
+
+	@Override
+	protected void onPause() {
+		getApplicationContext().unregisterReceiver(mMessageReceiver);
+		super.onPause();
+	}
+
+	@Override
+	protected void onResume() {
+		getApplicationContext().registerReceiver(mMessageReceiver, new IntentFilter(SERVICE_UPDATER));
+		super.onResume();
+	}
+
+	private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			Fragment visibleFragment = getVisibleFragment();
+			if (visibleFragment != null) {
+				if (visibleFragment instanceof FragmentHome) {
+					((FragmentHome) visibleFragment).checkNotification();
+				} else if (visibleFragment instanceof FragmentSupport) {
+					((FragmentSupport) visibleFragment).checkNotification();
+				} else if (visibleFragment instanceof FragmentInformation) {
+					((FragmentInformation) visibleFragment).checkNotification();
+				} else if (visibleFragment instanceof FragmentEnquiry) {
+					((FragmentEnquiry) visibleFragment).checkNotification();
+				} else if (visibleFragment instanceof FragmentLocation) {
+					((FragmentLocation) visibleFragment).checkNotification();
+				} else if (visibleFragment instanceof FragmentNotification) {
+					((FragmentNotification) visibleFragment).checkNotification();
+				}
+			} // End if
+		}
+	};
+
+	public Fragment getVisibleFragment() {
+		FragmentManager fragmentManager = getSupportFragmentManager();
+		List<Fragment> fragments = fragmentManager.getFragments();
+		for (Fragment fragment : fragments) {
+			if (fragment != null && fragment.isVisible())
+				return fragment;
+		}
+		return null;
 	}
 
 	@Override

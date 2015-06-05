@@ -87,4 +87,9 @@ public class FragmentEnquiry extends BaseFragment {
 		mBaseDrDigital.checkNotification(ContentType.Enquiry);
 	}
 
+	public void checkNotification() {
+
+		mBaseDrDigital.checkNotification(ContentType.Enquiry);
+	}
+
 }

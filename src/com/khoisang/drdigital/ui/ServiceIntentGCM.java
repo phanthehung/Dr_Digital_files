@@ -40,6 +40,9 @@ public class ServiceIntentGCM extends IntentService {
 					if (timeString != null && message != null && title != null) {
 						History.save(getApplication(), title, message, Long.valueOf(timeString));
 						generateNotification(getApplicationContext(), title, message);
+						//
+						Intent intentUpdater = new Intent(ActivityMain.SERVICE_UPDATER);
+						getApplicationContext().sendBroadcast(intentUpdater);
 					}
 				} catch (IOException e) {
 					// Ignore

@@ -100,4 +100,9 @@ public class FragmentInformation extends BaseFragment {
 		mBaseDrDigital.checkNotification(ContentType.Information);
 	}
 
+	public void checkNotification() {
+
+		mBaseDrDigital.checkNotification(ContentType.Information);
+	}
+
 }

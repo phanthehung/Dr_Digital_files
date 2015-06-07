@@ -2213,21 +2213,22 @@ containing a value of this type.
         public static final int common_signin_btn_text_normal_light=0x7f02004f;
         public static final int common_signin_btn_text_pressed_dark=0x7f020050;
         public static final int common_signin_btn_text_pressed_light=0x7f020051;
-        public static final int enquiry_icon=0x7f020052;
-        public static final int header=0x7f020053;
-        public static final int ic_launcher=0x7f020054;
-        public static final int ic_menu_chat_has_message=0x7f020055;
-        public static final int ic_plusone_medium_off_client=0x7f020056;
-        public static final int ic_plusone_small_off_client=0x7f020057;
-        public static final int ic_plusone_standard_off_client=0x7f020058;
-        public static final int ic_plusone_tall_off_client=0x7f020059;
-        public static final int information_icon=0x7f02005a;
-        public static final int khoisang_empty_photo=0x7f02005b;
-        public static final int location_icon=0x7f02005c;
-        public static final int notification_icon=0x7f02005d;
-        public static final int powered_by_google_dark=0x7f02005e;
-        public static final int powered_by_google_light=0x7f02005f;
-        public static final int support_icon=0x7f020060;
+        public static final int delete_icon=0x7f020052;
+        public static final int enquiry_icon=0x7f020053;
+        public static final int header=0x7f020054;
+        public static final int ic_launcher=0x7f020055;
+        public static final int ic_menu_chat_has_message=0x7f020056;
+        public static final int ic_plusone_medium_off_client=0x7f020057;
+        public static final int ic_plusone_small_off_client=0x7f020058;
+        public static final int ic_plusone_standard_off_client=0x7f020059;
+        public static final int ic_plusone_tall_off_client=0x7f02005a;
+        public static final int information_icon=0x7f02005b;
+        public static final int khoisang_empty_photo=0x7f02005c;
+        public static final int location_icon=0x7f02005d;
+        public static final int notification_icon=0x7f02005e;
+        public static final int powered_by_google_dark=0x7f02005f;
+        public static final int powered_by_google_light=0x7f020060;
+        public static final int support_icon=0x7f020061;
     }
     public static final class id {
         public static final int action_bar=0x7f0a0048;
@@ -2590,6 +2591,10 @@ containing a value of this type.
         public static final int create_calendar_message=0x7f0b001b;
         public static final int create_calendar_title=0x7f0b001a;
         public static final int decline=0x7f0b0019;
+        public static final int dialog_delete_message=0x7f0b004c;
+        public static final int dialog_delete_title=0x7f0b004b;
+        public static final int dialog_no=0x7f0b004d;
+        public static final int dialog_yes=0x7f0b004e;
         public static final int enquiry=0x7f0b003e;
         public static final int error_connection_error=0x7f0b0013;
         /**  Error 

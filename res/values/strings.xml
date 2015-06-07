@@ -19,5 +19,9 @@
     <string name="location_name">Location\'s name</string>
     <string name="location_address">Location Address</string>
     <string name="location_phone_number">Locations\' phone number</string>
+    <string name="dialog_delete_title">Delete notification</string>
+    <string name="dialog_delete_message">Do you want to delete</string>
+    <string name="dialog_no">No</string>
+    <string name="dialog_yes">Yes</string>
 
 </resources>

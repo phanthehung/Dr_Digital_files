@@ -1,29 +1,27 @@
 package com.khoisang.drdigital.ui;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 
 import com.khoisang.drdigital.R;
 import com.khoisang.drdigital.adapter.AdapterNotification;
 import com.khoisang.drdigital.data.Notification;
 import com.khoisang.drdigital.ui.BaseDrDigital.ContentType;
+import com.khoisang.drdigital.util.History;
 import com.khoisang.khoisanglibary.ui.ListViewItem;
 import com.khoisang.khoisanglibary.ui.fragment.ListViewFragment;
 
 public class FragmentNotification extends ListViewFragment {
-
-	private ImageView mBottomOption1;
-	private ImageView mBottomOption2;
-	private ImageView mBottomOption3;
-	private ImageView mBottomOption4;
-
 	private BaseDrDigital mBaseDrDigital;
-
+	private AsyncTaskDeleteNotification mAysncTaskDeleteNotification;
 	private ArrayList<Object> listNotification;
 
 	private ArrayList<Object> getListNotification() {
@@ -106,12 +104,33 @@ public class FragmentNotification extends ListViewFragment {
 	}
 
 	@Override
-	protected void onClick(AdapterView<?> listView, View itemView, int position, Object obj) {
+	protected void onClick(AdapterView<?> listView, View itemView, final int position, Object obj) {
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
+		alertDialogBuilder.setTitle(getActivity().getResources().getString(com.khoisang.drdigital.R.string.dialog_delete_title));
+		alertDialogBuilder.setMessage(getActivity().getResources().getString(com.khoisang.drdigital.R.string.dialog_delete_message)).setCancelable(false).setPositiveButton(getActivity().getString(com.khoisang.drdigital.R.string.dialog_yes), new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				try {
+					DeleteNotification(position);
+					dialog.dismiss();
+				} catch (IOException e) {
+					// Ignore
+				}
+			}
+		}).setNegativeButton(getActivity().getResources().getString(com.khoisang.drdigital.R.string.dialog_no), new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				dialog.cancel();
+				dialog.dismiss();
+			}
+		});
+
+		AlertDialog alertDialog = alertDialogBuilder.create();
+		alertDialog.show();
 	}
 
 	@Override
 	protected ListViewItem getItemObject() {
-		return new AdapterNotification();
+		AdapterNotification itemObject = new AdapterNotification();
+		return itemObject;
 	}
 
 	@Override
@@ -123,13 +142,52 @@ public class FragmentNotification extends ListViewFragment {
 	protected void reCreateView() {
 		mBaseDrDigital.initView(getView());
 		mBaseDrDigital.checkNotification(ContentType.Notification);
+
 		if (getListNotification().size() == 0)
 			showToast("Not found", false);
 	}
 
 	public void checkNotification() {
-
 		mBaseDrDigital.checkNotification(ContentType.Notification);
 	}
 
+	public void DeleteNotification(int position) throws IOException {
+		if (getActivity() == null || getActivity().getApplication() == null)
+			return;
+
+		getListNotification().remove(position);
+		mAdapter.notifyDataSetChanged();
+
+		if (mAysncTaskDeleteNotification != null) {
+			mAysncTaskDeleteNotification.cancel(false);
+			mAysncTaskDeleteNotification = null;
+		}
+		mAysncTaskDeleteNotification = new AsyncTaskDeleteNotification();
+		mAysncTaskDeleteNotification.execute(getListNotification());
+	}
+
+	class AsyncTaskDeleteNotification extends AsyncTask<List<Object>, Void, Void> {
+
+		@Override
+		protected Void doInBackground(List<Object>... params) {
+			List<Object> listNotification = params[0];
+
+			try {
+				History.delete(getActivity().getApplication());
+			} catch (Exception ex) {
+				// Nothing
+			}
+			for (Object tempObject : listNotification) {
+				try {
+					if (this.isCancelled() == true)
+						break;
+					Notification notification = (Notification) tempObject;
+					History.save(getActivity().getApplication(), notification.title, notification.message, notification.time);
+				} catch (IOException e) {
+					// Nothing
+				}
+			}
+			return null;
+		}
+	}
 }

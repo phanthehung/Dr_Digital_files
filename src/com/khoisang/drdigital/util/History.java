@@ -14,6 +14,11 @@ import android.app.Application;
 public class History {
 	private static final String FILE_NAME = "History";
 
+	public static void delete(Application application) {
+		com.khoisang.khoisanglibary.dev.FileWriter fileWriter = new com.khoisang.khoisanglibary.dev.FileWriter(application, FILE_NAME);
+		fileWriter.delete();
+	}
+
 	public static void save(Application application, String title, String message, long timeStamp) throws IOException {
 		com.khoisang.khoisanglibary.dev.FileWriter fileWriter = new com.khoisang.khoisanglibary.dev.FileWriter(application, FILE_NAME);
 		fileWriter.write(Base64.encodeBytes(title.getBytes()) + ";" + Base64.encodeBytes(message.getBytes()) + ";" + Base64.encodeBytes((String.valueOf(timeStamp * 1000)).getBytes()) + "&");

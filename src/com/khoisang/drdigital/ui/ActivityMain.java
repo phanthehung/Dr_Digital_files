@@ -25,7 +25,6 @@ import android.widget.TextView;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
-import com.google.android.gms.internal.ff;
 import com.google.gson.Gson;
 import com.khoisang.drdigital.R;
 import com.khoisang.drdigital.api.ApiManager;
@@ -356,7 +355,7 @@ public class ActivityMain extends BaseActivity implements OnClickListener, HttpH
 
 	@Override
 	public void handleResult(int ID, int Name, HttpResult httpResult, String bodyString, Object holder) {
-		DebugLog.i(getTag(), bodyString);
+		//DebugLog.i(getTag(), bodyString);
 		try {
 			hideIndicator();
 			OutputGetData outputGetData = new Gson().fromJson(bodyString, OutputGetData.class);

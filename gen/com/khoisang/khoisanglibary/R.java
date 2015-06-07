@@ -491,8 +491,8 @@ public final class R {
 		public static final int abc_textfield_search_activated_mtrl_alpha = 0x7f020030;
 		public static final int abc_textfield_search_default_mtrl_alpha = 0x7f020031;
 		public static final int abc_textfield_search_material = 0x7f020032;
-		public static final int ic_menu_chat_has_message = 0x7f020055;
-		public static final int khoisang_empty_photo = 0x7f02005b;
+		public static final int ic_menu_chat_has_message = 0x7f020056;
+		public static final int khoisang_empty_photo = 0x7f02005c;
 	}
 	public static final class id {
 		public static final int action_bar = 0x7f0a0048;

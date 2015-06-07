@@ -4,7 +4,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import android.text.format.DateFormat;
 import android.widget.TextView;
 
 import com.khoisang.drdigital.data.Notification;
@@ -26,8 +25,7 @@ public class AdapterNotification extends ListViewItem {
 		_title.setText(notification.title);
 		_message.setText(notification.message);
 
-		SimpleDateFormat sdf = new SimpleDateFormat("MMM dd HH:mm:ss yyyy", Locale.getDefault());
+		SimpleDateFormat sdf = new SimpleDateFormat("MMM dd HH:mm:ss", Locale.getDefault());
 		_time.setText(sdf.format(new Date(notification.time)));
 	}
-
 }

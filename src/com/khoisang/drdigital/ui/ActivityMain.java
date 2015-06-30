@@ -1,6 +1,5 @@
 package com.khoisang.drdigital.ui;
 
-import java.net.UnknownHostException;
 import java.util.List;
 
 import android.app.AlertDialog;
@@ -26,13 +25,14 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.google.gson.Gson;
-import com.khoisang.drdigital.R;
+import com.itech.drdigital.R;
 import com.khoisang.drdigital.api.ApiManager;
 import com.khoisang.drdigital.api.structure.InputGetData;
 import com.khoisang.drdigital.api.structure.OutputGetData;
 import com.khoisang.drdigital.constant.Event;
 import com.khoisang.drdigital.data.Location;
 import com.khoisang.drdigital.data.Notification;
+import com.khoisang.drdigital.util.Api;
 import com.khoisang.drdigital.util.History;
 import com.khoisang.khoisanglibary.dev.DebugLog;
 import com.khoisang.khoisanglibary.dev.DebugLog.DebugLogListerner;
@@ -41,11 +41,9 @@ import com.khoisang.khoisanglibary.network.HttpHandler;
 import com.khoisang.khoisanglibary.network.HttpResult;
 import com.khoisang.khoisanglibary.ui.ActionEvent;
 import com.khoisang.khoisanglibary.ui.activity.BaseActivity;
-import com.khoisang.khoisanglibary.util.NetwordUtil;
 
 public class ActivityMain extends BaseActivity implements OnClickListener, HttpHandler, DebugLogListerner, BaseDrDigital {
-
-	public static final String PROJECT_NUMBER_ID = "660565524128";
+	public static final String PROJECT_NUMBER_ID = "795552027556";
 	public static final String SERVICE_UPDATER = "ServiceIntentGCM";
 	private static final String PROPERTY_REG_ID = "registration_id";
 	private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
@@ -165,10 +163,10 @@ public class ActivityMain extends BaseActivity implements OnClickListener, HttpH
 
 		addFragment(getFragmentHome(), R.id.activity_main_content);
 
-		if (NetwordUtil.isNetworkAvailable(this) == false) {
+		/*if (NetwordUtil.isNetworkAvailable(this) == false) {
 			handleError(new UnknownHostException());
 			return;
-		}
+		}*/
 
 		if (checkPlayServices() == true) {
 			mGoogleCloudMessage = GoogleCloudMessaging.getInstance(getApplicationContext());
@@ -343,7 +341,23 @@ public class ActivityMain extends BaseActivity implements OnClickListener, HttpH
 			@Override
 			public void run() {
 				hideIndicator();
-				handleError(ex);
+
+				try {
+					if (Api.exist(getApplication()) == true && Api.get(getApplication()).equalsIgnoreCase("") == false) {
+						String content = Api.get(getApplication());
+						OutputGetData outputGetData = new Gson().fromJson(content, OutputGetData.class);
+						mFragmentSupport = new FragmentSupport(outputGetData.support, ActivityMain.this);
+						mFragmentEnquiry = new FragmentEnquiry(outputGetData.enquiry, ActivityMain.this);
+						mFragmentInformation = new FragmentInformation(outputGetData.info, ActivityMain.this);
+						mFragmentLocation = new FragmentLocation(outputGetData.location, ActivityMain.this);
+						//
+						processIntent(getIntent());
+					} else {
+						handleError(ex);
+					}
+				} catch (Exception ex) {
+					handleError(ex);
+				}
 			}
 		});
 	}
@@ -364,6 +378,8 @@ public class ActivityMain extends BaseActivity implements OnClickListener, HttpH
 			mFragmentInformation = new FragmentInformation(outputGetData.info, this);
 			mFragmentLocation = new FragmentLocation(outputGetData.location, this);
 			//
+			Api.delete(getApplication());
+			Api.save(getApplication(), bodyString);
 			processIntent(getIntent());
 		} catch (Exception ex) {
 			handleError(ex);

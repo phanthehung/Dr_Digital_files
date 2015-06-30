@@ -6,7 +6,7 @@ import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.khoisang.drdigital.R;
+import com.itech.drdigital.R;
 import com.khoisang.drdigital.constant.Event;
 import com.khoisang.drdigital.ui.BaseDrDigital.ContentType;
 import com.khoisang.khoisanglibary.ui.ActionEvent;

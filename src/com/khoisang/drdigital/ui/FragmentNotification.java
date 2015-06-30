@@ -11,7 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 
-import com.khoisang.drdigital.R;
+import com.itech.drdigital.R;
 import com.khoisang.drdigital.adapter.AdapterNotification;
 import com.khoisang.drdigital.data.Notification;
 import com.khoisang.drdigital.ui.BaseDrDigital.ContentType;
@@ -106,8 +106,8 @@ public class FragmentNotification extends ListViewFragment {
 	@Override
 	protected void onClick(AdapterView<?> listView, View itemView, final int position, Object obj) {
 		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
-		alertDialogBuilder.setTitle(getActivity().getResources().getString(com.khoisang.drdigital.R.string.dialog_delete_title));
-		alertDialogBuilder.setMessage(getActivity().getResources().getString(com.khoisang.drdigital.R.string.dialog_delete_message)).setCancelable(false).setPositiveButton(getActivity().getString(com.khoisang.drdigital.R.string.dialog_yes), new DialogInterface.OnClickListener() {
+		alertDialogBuilder.setTitle(getActivity().getResources().getString(R.string.dialog_delete_title));
+		alertDialogBuilder.setMessage(getActivity().getResources().getString(R.string.dialog_delete_message)).setCancelable(false).setPositiveButton(getActivity().getString(R.string.dialog_yes), new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
 				try {
 					DeleteNotification(position);
@@ -116,7 +116,7 @@ public class FragmentNotification extends ListViewFragment {
 					// Ignore
 				}
 			}
-		}).setNegativeButton(getActivity().getResources().getString(com.khoisang.drdigital.R.string.dialog_no), new DialogInterface.OnClickListener() {
+		}).setNegativeButton(getActivity().getResources().getString(R.string.dialog_no), new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
 				dialog.cancel();
 				dialog.dismiss();

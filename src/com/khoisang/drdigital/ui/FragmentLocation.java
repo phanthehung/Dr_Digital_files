@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 
-import com.khoisang.drdigital.R;
+import com.itech.drdigital.R;
 import com.khoisang.drdigital.adapter.AdapterLocation;
 import com.khoisang.drdigital.data.Location;
 import com.khoisang.drdigital.ui.BaseDrDigital.ContentType;

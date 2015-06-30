@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package com.khoisang.drdigital;
+package com.itech.drdigital;
 
 public final class Manifest {
     public static final class permission {

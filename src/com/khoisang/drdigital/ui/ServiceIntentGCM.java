@@ -13,7 +13,7 @@ import android.os.Vibrator;
 import android.support.v4.app.NotificationCompat;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
-import com.khoisang.drdigital.R;
+import com.itech.drdigital.R;
 import com.khoisang.drdigital.util.History;
 
 public class ServiceIntentGCM extends IntentService {
@@ -41,6 +41,8 @@ public class ServiceIntentGCM extends IntentService {
 						History.save(getApplication(), title, message, Long.valueOf(timeString));
 						generateNotification(getApplicationContext(), title, message);
 						//
+						ApplicationDrDigital applicationDrDigital = (ApplicationDrDigital) getApplicationContext();
+						applicationDrDigital.setCounter(applicationDrDigital.getCounter() + 1);
 						Intent intentUpdater = new Intent(ActivityMain.SERVICE_UPDATER);
 						getApplicationContext().sendBroadcast(intentUpdater);
 					}
@@ -55,9 +57,6 @@ public class ServiceIntentGCM extends IntentService {
 	private void generateNotification(Context context, String title, String message) {
 		Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
 		vibrator.vibrate(500);
-
-		ApplicationDrDigital applicationDrDigital = (ApplicationDrDigital) context.getApplicationContext();
-		applicationDrDigital.setCounter(applicationDrDigital.getCounter() + 1);
 
 		Intent intent = new Intent(this, ActivityMain.class);
 		PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_ONE_SHOT);

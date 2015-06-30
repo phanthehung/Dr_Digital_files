@@ -27,7 +27,7 @@ public class History {
 	public static List<Notification> get(Application application) throws IOException {
 		List<Notification> listNotification = new ArrayList<Notification>();
 		com.khoisang.khoisanglibary.dev.FileWriter fileWriter = new com.khoisang.khoisanglibary.dev.FileWriter(application, FILE_NAME);
-		if (fileWriter.isExist() == false)
+		if (fileWriter.exist() == false)
 			return null;
 
 		String message = fileWriter.get(false);

@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
 
-import com.khoisang.drdigital.R;
+import com.itech.drdigital.R;
 import com.khoisang.drdigital.ui.BaseDrDigital.ContentType;
 import com.khoisang.khoisanglibary.ui.fragment.BaseFragment;
 

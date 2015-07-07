@@ -19,7 +19,7 @@ public class ApiManager {
 
 		Uri.Builder builder = new Builder();
 		builder.scheme("http");
-		builder.encodedAuthority("tongkho.info");
+		builder.encodedAuthority("itech.com.sg");
 		builder.encodedPath("drdigital/api/getData");
 
 		httpManager.post(1, null, builder.build(), httpHandler, null, multipartEntityBuilder, 1);
